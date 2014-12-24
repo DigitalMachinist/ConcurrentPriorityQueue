@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"Comp",
+				"ComparerTest"
+			],
+			[
+				"enum",
+				"enumeratorLength"
+			],
+			[
+				"Pri",
+				"PriorityQueue"
+			],
+			[
+				"left",
+				"leftComparison"
+			],
+			[
+				"Icomp",
+				"IComparable"
+			],
+			[
+				"s",
+				"summary"
+			],
+			[
 				"on",
 				"onRetryButtonClicked"
 			],
@@ -191,12 +215,24 @@
 	"build_system": "Packages/User/nodeJS.sublime-build",
 	"command_palette":
 	{
-		"height": 341.0,
+		"height": 400.0,
 		"selected_items":
 		[
 			[
+				"md",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
 				"ww",
 				"Word Wrap: Toggle"
+			],
+			[
+				"syn c#",
+				"Set Syntax: C#"
+			],
+			[
+				"cs syn",
+				"CodeFormatter: Format as CSS Syntax"
 			],
 			[
 				"pd",
@@ -225,10 +261,6 @@
 			[
 				"boo",
 				"Bookmarks: Toggle"
-			],
-			[
-				"md",
-				"Markdown Preview: Preview in Browser"
 			],
 			[
 				"syn js",
@@ -420,10 +452,15 @@
 	},
 	"expanded_folders":
 	[
-		"/home/jeff/Development/csharp/BinaryHeap"
+		"/home/jeff/Development/csharp/ConcurrentPriorityQueue"
 	],
 	"file_history":
 	[
+		"/home/jeff/Development/csharp/BinaryHeap/PriorityQueueNew.cs",
+		"/home/jeff/Development/csharp/BinaryHeap/BinaryHeap.cs",
+		"/home/jeff/Development/csharp/BinaryHeap/BinaryHeapExample.cs",
+		"/home/jeff/Development/csharp/BinaryHeap/PriorityQueue.cs",
+		"/home/jeff/Development/csharp/BinaryHeap/.gitignore",
 		"/home/jeff/Development/__git/peir/client/app/services/QuizReferences/QuizReferences.js",
 		"/home/jeff/Development/__git/peir/client/app/directives/peirContentAccordionGroup/peirContentAccordionGroupDirective.js",
 		"/home/jeff/Development/__git/peir/client/app/views/user/Program/Module1/M1P07_KTCommentary1/M1P07_KTCommentary1Controller.js",
@@ -546,16 +583,11 @@
 		"/home/jeff/Development/__git/peir/client/app/views/user/KTPortfolio/PASTChecklistResults/PASTChecklistResults.html",
 		"/home/jeff/Development/__git/peir/client/app/directives/errorMessage/errorMessageDirective.js",
 		"/home/jeff/Development/__git/peir/client/app/directives/errorMessage/errorMessageDirectiveTest.js",
-		"/home/jeff/Development/__git/peir/client/app/services/$errorMessage/$errorMessageTest.js",
-		"/home/jeff/Development/__git/peir/client/app/services/$peirHomeData/$peirHomeData.js",
-		"/home/jeff/Development/__git/peir/client/app/services/$peirValidation/$peirValidation.js",
-		"/home/jeff/Development/__git/peir/client/app/directives/peirContentAccordionGroup/peirContentAccordionGroup.html",
-		"/home/jeff/Development/__git/peir/client/app/views/user/KTPortfolio/HowToUseMyKTPortfolio/HowToUseMyKTPortfolio.html",
-		"/home/jeff/Development/__git/peir/client/app/views/user/KTPortfolio/CoreCompetencies/CoreCompetencies.html"
+		"/home/jeff/Development/__git/peir/client/app/services/$errorMessage/$errorMessageTest.js"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 25.0
 	},
 	"find_in_files":
 	{
@@ -576,6 +608,24 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"__baseHeap",
+			"TValue",
+			"__baseHeap",
+			"DummyComparer",
+			"_comparer",
+			"d",
+			"_baseHeap",
+			"elementIdx",
+			"pos",
+			"parentPos",
+			"i",
+			"pos",
+			"_comparer",
+			"_baseHeap",
+			"rslt",
+			"tmp",
+			"__heapData",
+			"__sortingMode",
 			" } )\" ",
 			"href=\"#\" ui-sref=\"user.e-library( { 'referenceNum': ",
 			"quiz-",
@@ -685,25 +735,7 @@
 			"moveToLeft",
 			"collapse",
 			"ng-if=\"",
-			"col-sm-4",
-			"col-sm-6",
-			"error",
-			"col-sm-4",
-			"isEmpty( value )",
-			" && valid",
-			"return (",
-			";\n        } else {\n          return ",
-			" {\n          outErrorMessage = ",
-			"if ( ",
-			", outErrorMessage",
-			"validate",
-			"errorMessageOut",
-			", ",
-			"col-sm-4",
-			" supportEmail ",
-			" recoveryURL ",
-			"\" ",
-			"=\" recoveryURL \""
+			"col-sm-4"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -748,7 +780,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 29.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -789,10 +821,10 @@
 	{
 		"height": 151.0
 	},
-	"project": "BinaryHeap.sublime-project",
+	"project": "ConcurrentPriorityQueue.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":
