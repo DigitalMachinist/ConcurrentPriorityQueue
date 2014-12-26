@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Axon.Collections
 {
@@ -14,10 +15,7 @@ namespace Axon.Collections
     class ConcurrentBinaryMinHeap<T>
     : ICollection< KeyValuePair<float, T> >
     {
-
-
         #region Instance members
-
 
         /// <summary>
         /// The actual List array structure that backs the implementation of the heap.
@@ -44,8 +42,8 @@ namespace Axon.Collections
                 {
                     Monitor.Exit( __data );
                     // Unlock the heap -- CRITICAL SECTION END
-                    return result;
                 }
+                return result;
             }
         }
 
@@ -69,8 +67,8 @@ namespace Axon.Collections
                 {
                     Monitor.Exit( __data );
                     // Unlock the heap -- CRITICAL SECTION END
-                    return result;
                 }
+                return result;
             }
         }
 
@@ -94,8 +92,8 @@ namespace Axon.Collections
                 {
                     Monitor.Exit( __data );
                     // Unlock the heap -- CRITICAL SECTION END
-                    return result;
                 }
+                return result;
             }
         }
 
@@ -106,15 +104,10 @@ namespace Axon.Collections
         /// </summary>
         public bool IsReadOnly { get { return false; } }
 
-
         #endregion
 
 
-
-
-
         #region Constructors
-
 
         /// <summary>
         /// Create a new default heap.
@@ -122,17 +115,7 @@ namespace Axon.Collections
         public
         ConcurrentBinaryMinHeap()
         {
-            // Lock the heap -- CRITICAL SECTION BEGIN
-            Monitor.Enter( __data );
-            try
-            {
-                __data = new List< KeyValuePair<float, T> >();
-            }
-            finally
-            {
-                Monitor.Exit( __data );
-                // Unlock the heap -- CRITICAL SECTION END
-            }
+            __data = new List< KeyValuePair<float, T> >();
         }
 
 
@@ -147,8 +130,6 @@ namespace Axon.Collections
         public
         ConcurrentBinaryMinHeap( int initialCapacity )
         {
-            // Lock the heap -- CRITICAL SECTION BEGIN
-            Monitor.Enter( __data );
             try
             {
                 __data = new List< KeyValuePair<float, T> >( initialCapacity );
@@ -157,22 +138,12 @@ namespace Axon.Collections
             {
                 throw e;
             }
-            finally
-            {
-                Monitor.Exit( __data );
-                // Unlock the heap -- CRITICAL SECTION END
-            }
         }
-
 
         #endregion
 
 
-
-
-
         #region Public methods
-
 
         /// <summary>
         /// Inserts a KeyValuePair as a new element into the heap.
@@ -244,9 +215,6 @@ namespace Axon.Collections
         /// </summary>
         /// <param name="item">The KeyValuePair to locate in the heap.</param>
         /// <returns><c>true</c> if item is found in the heap; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="NotSupportedException">
         /// Thrown when the heap is in read-only mode.
         /// </exception>
@@ -254,11 +222,6 @@ namespace Axon.Collections
         bool
         Contains( KeyValuePair<float, T> element )
         {
-            if ( !element )
-            {
-                throw new ArgumentNullException( "element to find must be non-null." );
-            }
-
             // Lock the thread -- CRITICAL SECTION BEGIN
             Monitor.Enter( __data );
             bool result = false;
@@ -274,8 +237,9 @@ namespace Axon.Collections
             {
                 Monitor.Exit( __data );
                 // Unlock the thread -- CRITICAL SECTION END
-                return result;
             }
+
+            return result;
         }
 
 
@@ -284,7 +248,7 @@ namespace Axon.Collections
         /// method does not guarantee that elements will be copied in the sorted order.
         /// </summary>
         /// <param name="array">The one-dimensional Array that is the destination of the elements
-        /// copied from theheap. The Array must have zero-based indexing. </param>
+        /// copied from the heap. The Array must have zero-based indexing. </param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         /// <exception cref="ArgumentNullException">
         /// Thrown when the given array is null.
@@ -323,7 +287,9 @@ namespace Axon.Collections
 
         /// <summary>
         /// Returns an enumerator that iterates through the heap's elements. This enumerator is
-        /// not guaranteed to iterate through elements in sorted order.
+        /// not guaranteed to iterate through elements in sorted order, and indeed, is not even 
+		/// guaranteed to iterate through elements by priority (although in general the iterated
+		/// elements will tend from high to low priority values).
         /// </summary>
         /// <returns>An generic enumerator of the heap's contents.</returns>
         public
@@ -341,14 +307,16 @@ namespace Axon.Collections
             {
                 Monitor.Exit( __data );
                 // Unlock the thread -- CRITICAL SECTION END
-                return result;
             }
+            return result;
         }
 
 
         /// <summary>
         /// Returns an enumerator that iterates through the heap's elements. This enumerator is
-        /// not guaranteed to iterate through elements in sorted order.
+        /// not guaranteed to iterate through elements in sorted order, and indeed, is not even 
+		/// guaranteed to iterate through elements by priority (although in general the iterated
+		/// elements will tend from high to low priority values).
         /// </summary>
         /// <returns>An enumerator of the heap's contents.</returns>
         IEnumerator
@@ -366,8 +334,8 @@ namespace Axon.Collections
             {
                 Monitor.Exit( __data );
                 // Unlock the thread -- CRITICAL SECTION END
-                return result;
             }
+            return result;
         }
 
 
@@ -388,7 +356,7 @@ namespace Axon.Collections
 
             // Lock the thread -- CRITICAL SECTION BEGIN
             Monitor.Enter( __data );
-            KeyValuePair<float, T> result = null;
+            KeyValuePair<float, T> result;
             try
             {
                 // Return the root element of the heap.
@@ -398,8 +366,23 @@ namespace Axon.Collections
             {
                 Monitor.Exit( __data );
                 // Unlock the thread -- CRITICAL SECTION END
-                return result;
             }
+
+            return result;
+        }
+
+
+		/// <summary>
+        /// Return the value of the current root element of the heap, but don't remove it.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when the heap is empty.
+        /// </exception>
+        public
+        T
+        PeekValue()
+        {
+            return Peek().Value;
         }
 
 
@@ -439,7 +422,7 @@ namespace Axon.Collections
 
             // Lock the thread -- CRITICAL SECTION BEGIN
             Monitor.Enter( __data );
-            KeyValuePair<float, T> result
+            KeyValuePair<float, T> result;
             try
             {
                 // Keep a reference to the element at the root of the heap.
@@ -468,9 +451,52 @@ namespace Axon.Collections
             {
                 Monitor.Exit( __data );
                 // Unlock the thread -- CRITICAL SECTION END
-                return result;
             }
+
+            return result;
         }
+
+
+		/// <summary>
+        /// Return the value of the current root element of the heap, and then remove it. This 
+		/// operation will heapify the heap after removal to ensure that it remains sorted.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the given element is null.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown by HeapifyTopDown() when the given index is out of range.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown by SwapElements() when the inputs to SwapElements() are invalid.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown by List.RemoveAt() when the inputs to List.RemoveAt() are invalid.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown by SwapElements() when there are less than 2 elements in the heap.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when the heap is empty.
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// Thrown by List.Clear() when the heap is in read-only mode.
+        /// </exception>
+        public
+        T
+        PopValue()
+        {
+			T result;
+			try
+			{
+				result = Pop().Value;
+			}
+			catch ( Exception e )
+			{
+				throw e;
+			}
+			return result;
+		}
 
 
         /// <summary>
@@ -479,9 +505,6 @@ namespace Axon.Collections
         /// </summary>
         /// <param name="element">A KeyValuePair containing a float priority as its key and a
         /// generically-typed value.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown by HeapifyBottomUp() when the given index is out of range.
         /// </exception>
@@ -501,11 +524,6 @@ namespace Axon.Collections
         void
         Push( KeyValuePair<float, T> element )
         {
-            if ( !element )
-            {
-                throw new ArgumentNullException( "KeyValuePair element to insert cannot be null." );
-            }
-
             // Lock the thread -- CRITICAL SECTION BEGIN
             Monitor.Enter( __data );
             try
@@ -581,9 +599,6 @@ namespace Axon.Collections
         /// <param name="item">The KeyValuePair element to remove from the heap.</param>
         /// <returns><c>true</c> if item was successfully removed from the priority heap.
         /// This method returns <c>false</c> if item is not found in the collection.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown by HeapifyTopDown() when the inputs to HeapifyTopDown() are out of range.
         /// </exception>
@@ -606,13 +621,9 @@ namespace Axon.Collections
         bool
         Remove( KeyValuePair<float, T> element )
         {
-            if ( __data.IsEmpty )
+            if ( IsEmpty )
             {
                 throw new InvalidOperationException( "The heap is empty." );
-            }
-            if ( !element )
-            {
-                throw new ArgumentNullException( "element to remove must be non-null." );
             }
 
             // Lock the thread -- CRITICAL SECTION BEGIN
@@ -622,27 +633,34 @@ namespace Axon.Collections
             {
                 // Find the element within the heap.
                 int index = __data.IndexOf( element );
+				//Console.WriteLine( "index: " + index + ", count: " + __data.Count );
                 if ( index < 0 )
                 {
                     // Return false to indicate that the element was not found in the heap.
                     result = false;
                 }
-                else
+                else if ( index == __data.Count - 1 )
                 {
-                    // Move the last element up to index of the found element.
-                    SwapElements( index, __data.Count - 1 );
-                    __data.RemoveAt( __data.Count - 1 );
-
-                    // Heapify to move the element at index into its correct position within the heap.
-                    int newIndex = HeapifyBottomUp( index );
-                    if ( newIndex == index )
-                    {
-                        HeapifyTopDown( index );
-                    }
-
-                    // Return true to indicate that the element was found.
-                    result = true;
-                }
+					// If we're removing the last element, we can simply remove it. There is no 
+					// need to heapify following the removal.
+					__data.RemoveAt( index );
+					result = true;
+				}
+				else
+				{
+					// In most cases, we need to swap the element from the index where it was found 
+					// with the last element in the set, then remove the last element (since it is
+					// now the one we aimed to get rid of). Then, once this has been done, we need 
+					// to heapify up (and potentially also down) to re-sort the heap.
+					SwapElements( index, __data.Count - 1 );
+					__data.RemoveAt( __data.Count - 1 );
+					int newIndex = HeapifyBottomUp( index );
+					if ( newIndex == index )
+					{
+						HeapifyTopDown( index );
+					}
+					result = true;
+				}
             }
             catch ( Exception e )
             {
@@ -652,19 +670,16 @@ namespace Axon.Collections
             {
                 Monitor.Exit( __data );
                 // Unlock the thread -- CRITICAL SECTION END
-                return result;
             }
+
+            return result;
         }
 
 
         #endregion
 
 
-
-
-
         #region Private methods
-
 
         /// <summary>
         /// Swap the heap element at index1 with the heap element at index2.
@@ -749,30 +764,36 @@ namespace Axon.Collections
                 throw new ArgumentOutOfRangeException( "index must be within the range [0,Count-1]." );
             }
 
+			//Console.WriteLine( "HeapifyBottomUp" );
+			//Console.WriteLine( "index: " + index + ", count: " + __data.Count );
+
             // Lock the thread -- CRITICAL SECTION BEGIN
             Monitor.Enter( __data );
             try
             {
                 // Given an index i of some heap node:
-                // Index of the LEFT CHILD of i  = 2i + 1
-                // Index of the RIGHT CHILD of i = 2i + 2
-                // Index of the PARENT of i      = (i - 1) / 2
+                // Index of the LEFT CHILD of i:  j = 2i + 1
+                // Index of the RIGHT CHILD of i: j = 2i + 2
+                // Index of the PARENT of i:      j = (i - 1) / 2
 
                 float priority = 0f;
                 float priorityParent = 0f;
-                while ( index > 0 && priority < priorityParent )
+                do
                 {
                     int parentIndex = ( index - 1 ) / 2;
                     priority        = __data[ index ].Key;
                     priorityParent  = __data[ parentIndex ].Key;
 
-                    comparison = priority < priorityParent;
-                    if ( cpriority < priorityParent )
+					//Console.WriteLine( "Priority: " + priority );
+					//Console.WriteLine( "PARENT Priority: " + priorityParent );
+
+                    if ( priority > priorityParent )
                     {
                         SwapElements( index, parentIndex );
                         index = parentIndex;
                     }
                 }
+                while ( index > 0 && priority > priorityParent );
             }
             catch ( Exception e )
             {
@@ -782,8 +803,9 @@ namespace Axon.Collections
             {
                 Monitor.Exit( __data );
                 // Unlock the thread -- CRITICAL SECTION END
-                return index;
             }
+
+            return index;
         }
 
 
@@ -816,47 +838,55 @@ namespace Axon.Collections
                 throw new ArgumentOutOfRangeException( "Index must be a valid index within the heap." );
             }
 
+			//Console.WriteLine( "HeapifyTopDown" );
+			//Console.WriteLine( "index: " + index + ", count: " + __data.Count );
+
             // Lock the thread -- CRITICAL SECTION BEGIN
             Monitor.Enter( __data );
             try
             {
                 // Given an index i of some heap node:
-                // Index of the LEFT CHILD of i  = 2i + 1
-                // Index of the RIGHT CHILD of i = 2i + 2
-                // Index of the PARENT of i      = (i - 1) / 2
+                // Index of the LEFT CHILD of i:  j = 2i + 1
+                // Index of the RIGHT CHILD of i: j = 2i + 2
+                // Index of the PARENT of i:      j = (i - 1) / 2
 
-                int smallest = -1;
-                while ( index < __data.Count && index != smallest )
+                int highestPriority = -1;
+                while ( index < __data.Count && index != highestPriority )
                 {
-                    // smallest is initialzed here since it can't be set before the while condition
-                    // (index != smallest would result in the while never running if so).
-                    smallest = index;
+                    // highestPriority is initialized here since it can't be set before the while 
+					// condition (index != highestPriority would result in the while never running 
+					// if so).
+                    highestPriority = index;
                     float priority = __data[ index ].Key;
 
-                    // Check if the priority of the left child is smaller than that of the element at
-                    // the current index.
+					//Console.WriteLine( "Priority: " + priority );
+
+                    // Check if the priority of the left child is greater than that of the element 
+					// at the current index.
                     int leftIndex = 2 * index + 1;
                     if ( leftIndex < __data.Count )
                     {
                         float priorityLeftChild = __data[ leftIndex ].Key;
                         if ( priority < priorityLeftChild )
                         {
-                            // Update the smallest index with the index of the left child.
-                            smallest = leftIndex;
+                            // Update the highestPriority index with the index of the left child.
+                            highestPriority = leftIndex;
                         }
+						//Console.WriteLine( "LEFT Priority: " + priorityLeftChild );
                     }
 
-                    // Check if the priority of the left child is smaller than that of the element at
-                    // the current index.
+                    // Check if the priority of the left child is greater than that of the element 
+					// at the current index.
                     int rightIndex = 2 * index + 2;
                     if ( rightIndex < __data.Count )
                     {
                         float priorityRightChild = __data[ rightIndex ].Key;
                         if ( priority < priorityRightChild )
                         {
-                            // Update the smallet index with the index of the right child.
-                            smallest = rightIndex;
+                            // Update the highestPriority index with the index of the right child.
+                            highestPriority = rightIndex;
                         }
+						//Console.WriteLine( "RIGHT Priority: " + priorityRightChild );
                     }
                 }
             }
@@ -867,9 +897,6 @@ namespace Axon.Collections
             }
         }
 
-
         #endregion
-
-
     }
 }

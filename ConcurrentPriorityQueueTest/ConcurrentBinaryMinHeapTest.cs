@@ -1,529 +1,492 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace Axon.Collections
 {
-    [TestClass]
+    [TestFixture]
     public class ConcurrentBinaryMinHeapTest
     {
-
-
         #region Instance members
 
-
-        [TestMethod]
+        [Test]
         public void PropertyCapacity()
         {
-            // Create a new priority queue.
-            ConcurrentBinaryMinHeap<int> instance = new ConcurrentBinaryMinHeap<int>( 15 );
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>( 15 );
 
             // Ensure that Capacity reports 15.
-            Assert.That( instance.Capacity, Is.EqualTo( 15 ) );
+            Assert.That( heap.Capacity, Is.EqualTo( 15 ) );
 
             // Intentionally over-fill the queue to force it to resize.
             for ( int i = 0; i < 16; i++ )
             {
-                instance.Enqueue( 1f, 1 );
+                heap.Push( 1f, 1 );
             }
 
             // Ensure that Capacity is now greater than 15.
-            Assert.That( instance.Capacity, Is.GreaterThan( 15 ) );
+            Assert.That( heap.Capacity, Is.GreaterThan( 15 ) );
         }
 
 
-        [TestMethod]
+        [Test]
         public void PropertyCount()
         {
-            // Create a new priority queue.
-            ConcurrentBinaryMinHeap<int> instance = new ConcurrentBinaryMinHeap<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Ensure that Count reports 0.
-            Assert.That( instance.Count, Is.EqualTo( 0 ) );
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
 
             // Enqueue 3 elements in the queue.
-            instance.Enqueue( 1f, 1 );
-            instance.Enqueue( 3f, 3 );
-            instance.Enqueue( 2f, 2 );
+            heap.Push( 1f, 1 );
+            heap.Push( 3f, 3 );
+            heap.Push( 2f, 2 );
 
             // Ensure that Count now reports 3.
-            Assert.That( instance.Count, Is.EqualTo( 3 ) );
+            Assert.That( heap.Count, Is.EqualTo( 3 ) );
         }
 
 
-        [TestMethod]
+        [Test]
         public void PropertyIsEmpty()
         {
-            // Create a new priority queue.
-            ConcurrentBinaryMinHeap<int> instance = new ConcurrentBinaryMinHeap<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Ensure that Count reports TRUE.
-            Assert.That( instance.IsEmpty, Is.True );
+            Assert.That( heap.IsEmpty, Is.True );
 
             // Enqueue an element in the queue.
-            instance.Enqueue( 1f, 1 );
+            heap.Push( 1f, 1 );
 
             // Ensure that Count now reports FALSE..
-            Assert.That( instance.IsEmpty, Is.False );
+            Assert.That( heap.IsEmpty, Is.False );
         }
 
 
-        [TestMethod]
+        [Test]
         public void PropertyIsReadOnly()
         {
-            // Create a new priority queue.
-            ConcurrentBinaryMinHeap<int> instance = new ConcurrentBinaryMinHeap<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Ensure that Count always reports FALSE.
-            Assert.That( instance.IsReadOnly, Is.False );
+            Assert.That( heap.IsReadOnly, Is.False );
         }
-
 
         #endregion
 
 
-
-
-
         #region Constructors
 
-
-        [TestMethod]
-        public
-        void
-        ConstructorParameterless()
+        [Test]
+        public void ConstructorParameterless()
         {
-            // Create a new priority queue.
-            ConcurrentBinaryMinHeap<int> instance = new ConcurrentBinaryMinHeap<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Nothing to test here. The following explicitly passes this test:
             Assert.That( true, Is.True );
         }
 
 
-        [TestMethod]
-        public
-        void
-        ConstructorInitialSize()
+        [Test]
+        public void ConstructorInitialSize()
         {
-            // Declare a priority queue var, but don't assign it yet.
-            ConcurrentBinaryMinHeap<int> instance;
+            // Try to create a heap with a negative initial size and expect an 
+			// ArgumentOutOfRangeException to be thrown.
+			Assert.Throws<ArgumentOutOfRangeException>( () => {
+				new ConcurrentBinaryMinHeap<int>( -10 );
+			} );
 
-            // Try to create a priority queue with a negative initial size and expect
-            // an InvalidOperationException to be thrown.
-            try {
-                instance = new ConcurrentBinaryMinHeap<int>( -10 );
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( InvalidOperationException e ) {}
-            catch ( Exception e ) {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
-
-            // Create a new priority queue.
-            ConcurrentBinaryMinHeap<int> instance = new ConcurrentBinaryMinHeap<int>( 15 );
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>( 15 );
 
             // Ensure that Capacity reports 15.
-            System.Assert.AreEqual( instance.Capacity, 15 );
+            Assert.That( heap.Capacity, Is.EqualTo( 15 ) );
         }
-
 
         #endregion
 
 
+        #region Public API
 
-
-
-        #region Heap operations (uncomment these if you make heap operations public to debug them)
-
-
-        [TestMethod]
+        [Test]
         public void Add() {
 
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Try to Dequeue() and expect an InvalidOperationException to be thrown.
-            try {
-                instance.Dequeue();
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( InvalidOperationException e ) {}
-            catch ( Exception e ) {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
+			Assert.Throws<InvalidOperationException>( () => {
+				heap.Pop();
+			} );
 
             // Call Add() to insert a new element to the queue as a KeyValuePair.
-            instance.Add( new KeyValuePair<float, int>( 1f, 2 ) );
+            heap.Add( new KeyValuePair<float, int>( 1f, 2 ) );
 
             // Expect a value of 1 on the first item to be removed after adding it.
-            Assert.That( instance.DequeueValue(), Is.EqualTo( 2 ) );
+            Assert.That( heap.PopValue(), Is.EqualTo( 2 ) );
         }
 
 
-        [TestMethod]
+        [Test]
         public void Clear() {
 
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Enqueue a few elements in the queue.
-            instance.Enqueue( 1f, 2 );
-            instance.Enqueue( 3f, 6 );
-            instance.Enqueue( 2f, 4 );
+            // Enqueue 3 elements into the queue.
+            heap.Push( 1f, 2 );
+            heap.Push( 3f, 6 );
+            heap.Push( 2f, 4 );
 
-            // Expect there for be at least 1 element so we have proof that something was actually
-            // cleared from the queue later.
-            Assert.That(
-                instance.Dequeue(),
-                Is.NotEqualTo( default( KeyValuePair<float, int> ) )
-            );
+            // Ensure that 3 elements have been added to the heap.
+            Assert.That( heap.Count, Is.EqualTo( 3 ) );
 
             // Clear the queue.
-            instance.Clear();
+            heap.Clear();
 
-            // Try to Dequeue() again and expect an InvalidOperationException to be thrown.
-            try {
-                instance.Dequeue();
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( InvalidOperationException e ) {}
-            catch ( Exception e ) {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
+            // Ensure that all of the elements have been removed.
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
         }
 
 
-        [TestMethod]
+        [Test]
         public void Contains() {
 
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Create and store a new element.
             KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
 
-            // Expect the queue to not contain the element.
-            Assert.That( instance.Contains( elem ), Is.False );
+            // Ensure the queue contains the element.
+            Assert.That( heap.Contains( elem ), Is.False );
 
             // Enqueue it in the queue.
-            instance.Add( elem );
+            heap.Push( elem );
 
-            // Expect the queue to now contain the element.
-            Assert.That( instance.Contains( elem ), Is.True );
-
-            // Enqueue it in the queue.
-            instance.Dequeue();
-
-            // Expect the queue to no longer contain the element.
-            Assert.That( instance.Contains( elem ), Is.False );
+            // Ensure the queue now contains the element.
+            Assert.That( heap.Contains( elem ), Is.True );
         }
 
 
-        [TestMethod]
-        public void CopyTo() {
-
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+        [Test]
+        public void CopyTo() 
+		{
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Create a new array of size 4.
             KeyValuePair<float, int>[] arrayCopy = new KeyValuePair<float, int>[ 5 ];
 
             // Enqueue 3 elements in the queue.
-            instance.Enqueue( 1f, 2 );
-            instance.Enqueue( 3f, 6 );
-            instance.Enqueue( 2f, 4 );
+            heap.Push( 1f, 2 );
+            heap.Push( 3f, 6 );
+            heap.Push( 2f, 4 );
 
             // Copy the queue data to the array, starting from index 1 (not 0).
-            instance.CopyTo( arrayCopy, 1 );
+            heap.CopyTo( arrayCopy, 1 );
 
             // Expect the first array index to be unset, but all the rest to be set.
-            Assert.That( arrayCopy[ 0 ],       Is.EqualTo( default( KeyValuePair<float, int> ) ) );
-            Assert.That( arrayCopy[ 1 ].Value, Is.EqualTo( 2 ) );
-            Assert.That( arrayCopy[ 2 ].Value, Is.EqualTo( 4 ) );
-            Assert.That( arrayCopy[ 3 ].Value, Is.EqualTo( 6 ) );
-            Assert.That( arrayCopy[ 4 ],       Is.EqualTo( default( KeyValuePair<float, int> ) ) );
+            Assert.That( arrayCopy[ 0 ], Is.EqualTo( default( KeyValuePair<float, int> ) ) );
+            Assert.That( arrayCopy[ 1 ], Is.EqualTo( new KeyValuePair<float, int>( 3f, 6 ) ) );
+            Assert.That( arrayCopy[ 2 ], Is.Not.EqualTo( default( KeyValuePair<float, int> ) ) );
+            Assert.That( arrayCopy[ 3 ], Is.Not.EqualTo( default( KeyValuePair<float, int> ) ) );
+            Assert.That( arrayCopy[ 4 ], Is.EqualTo( default( KeyValuePair<float, int> ) ) );
         }
 
 
-        [TestMethod]
-        public void GetEnumerator() {
-
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+        [Test]
+        public void GetEnumerator() 
+		{
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Enqueue a few elements in the queue.
-            instance.Enqueue( 1f, 1 );
-            instance.Enqueue( 3f, 3 );
-            instance.Enqueue( 2f, 2 );
+            heap.Push( 1f, 2 );
+            heap.Push( 3f, 6 );
+            heap.Push( 2f, 4 );
 
-            // Use the enumerator of instance (using disposes it when we're finished).
-            using ( var enumerator = instance.GetEnumerator() )
+            // Use the enumerator of heap (using disposes it when we're finished).
+            using ( var enumerator = heap.GetEnumerator() )
             {
-                // Expect elements to be ordered by descending priority value
-                Assert.That( enumerator.Current.Value, Is.EqualTo( 3 ) );
-                enumerator.MoveNext();
-                Assert.That( enumerator.Current.Value, Is.EqualTo( 2 ) );
-                enuSmerator.MoveNext();
-                Assert.That( enumerator.Current.Value, Is.EqualTo( 1 ) );
+                // Expect the first element to have the highest priority, and expect MoveNext() to 
+				// return true until the last element. After the end of the heap is reached, it 
+				// then returns false.
+                Assert.That( enumerator.MoveNext(), Is.True );
+                Assert.That( enumerator.Current.Value, Is.EqualTo( 6 ) );
+                Assert.That( enumerator.MoveNext(), Is.True );
+                Assert.That( enumerator.MoveNext(), Is.True );
+                Assert.That( enumerator.MoveNext(), Is.False );
             }
         }
 
 
-        [TestMethod]
-        public
-        void
-        Peek()
+        [Test]
+        public void Peek()
         {
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
             // Try to HeapPeek() and expect an InvalidOperationException to be thrown.
-            try
-            {
-                instance.HeapPeek();
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( InvalidOperationException e ) {}
-            catch ( Exception e )
-            {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
+			Assert.Throws<InvalidOperationException>( () => {
+				heap.Peek();
+			} );
 
-            // Ensure that heap is empty.
-            Assert.That( instance.Count, Is.EqualTo( 0 ) );
+            // Ensure that the heap is empty.
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the heap.
-            KeyValuePair<float, T> elem1 = new KeyValuePair<float, T>( 1f, 2 );
-            instance.HeapInsert( elem1 );
+            KeyValuePair<float, int> elem1 = new KeyValuePair<float, int>( 1f, 2 );
+            heap.Push( elem1 );
 
             // Ensure that the element was inserted into the heap as the root element.
-            Assert.That( instance.Count, Is.EqualTo( 1 ) );
-            Assert.That( instance.HeapPeek(), Is EqualTo( elem1 ) );
+            Assert.That( heap.Count, Is.EqualTo( 1 ) );
+            Assert.That( heap.Peek(), Is.EqualTo( elem1 ) );
 
             // Insert another element with higher priority than the last.
-            KeyValuePair<float, T> elem2 = new KeyValuePair<float, T>( 2f, 4 );
-            instance.HeapInsert( elem2 );
+            KeyValuePair<float, int> elem2 = new KeyValuePair<float, int>( 2f, 4 );
+            heap.Push( elem2 );
 
             // Ensure that HeapPeak() returns the new root element.
-            Assert.That( instance.HeapPeek(), Is.EqualTo( elem2 ) );
+            Assert.That( heap.Peek(), Is.EqualTo( elem2 ) );
         }
 
 
-        [TestMethod]
-        public
-        void
-        Pop()
+        [Test]
+        public void Pop()
         {
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Try to HeapDequeue() and expect an InvalidOperationException to be thrown.
-            try
-            {
-                instance.HeapDequeue();
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( InvalidOperationException e ) {}
-            catch ( Exception e )
-            {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
+            // Try to Pop() and expect an InvalidOperationException to be thrown.
+			Assert.Throws<InvalidOperationException>( () => {
+				heap.Pop();
+			} );
 
-            // Ensure that heap is empty.
-            Assert.That( instance.Count, Is EqualTo( 0 ) );
+            // Ensure that the heap is empty.
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the heap.
-            KeyValuePair<float, T> elem = new KeyValuePair<float, T>( 1f, 2 );
-            instance.HeapInsert( elem )
+            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
+            heap.Push( elem );
 
             // Ensure that the element was inserted into the heap.
-            Assert.That( instance.Count, Is.EqualTo( 1 ) );
-            Assert.That( instance.HeapPeek(), Is EqualTo( elem ) );
+            Assert.That( heap.Count, Is.EqualTo( 1 ) );
+            Assert.That( heap.Peek(), Is.EqualTo( elem ) );
 
             // Ensure that the returned element points to the same object as the reference we
-            // stored in elem earlier.
-            Assert.That( instance.HeapDequeue(), Is.EqualTo( elem ) );
+            // stored earlier.
+            Assert.That( heap.Pop(), Is.EqualTo( elem ) );
 
             // Ensure that the element was removed from the heap.
-            Assert.That( instance.Count, Is.EqualTo( 0 ) );
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
         }
 
 
-        [TestMethod]
-        public
-        void
-        Push()
+		[Test]
+        public void PopValue()
         {
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Ensure that heap is empty.
-            Assert.That( instance.Count, Is.EqualTo( 0 ) );
+            // Try to Pop() and expect an InvalidOperationException to be thrown.
+			Assert.Throws<InvalidOperationException>( () => {
+				heap.Pop();
+			} );
+
+            // Ensure that the heap is empty.
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the heap.
-            KeyValuePair<float, T> elem = new KeyValuePair<float, T>( 1f, 2 );
-            instance.HeapInsert( elem );
+            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
+            heap.Push( elem );
 
             // Ensure that the element was inserted into the heap.
-            Assert.That( instance.Count, Is.EqualTo( 1 ) );
-            Assert.That( instance.HeapPeek(), Is.EqualTo( elem ) );
+            Assert.That( heap.Peek(), Is.EqualTo( elem ) );
+
+            // Ensure that the returned element points to the same object as the reference we
+            // stored earlier.
+            Assert.That( heap.Pop(), Is.EqualTo( elem ) );
+
+            // Ensure that the element was removed from the heap.
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
         }
 
 
-        [TestMethod]
-        public
-        void
-        Push()
+        [Test]
+        public void PushElement()
         {
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Ensure that heap is empty.
-            Assert.That( instance.Count, Is.EqualTo( 0 ) );
+            // Ensure that the heap is empty.
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the heap.
-            KeyValuePair<float, T> elem = new KeyValuePair<float, T>( 1f, 2 );
-            instance.HeapInsert( elem );
+            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
+            heap.Push( elem );
 
             // Ensure that the element was inserted into the heap.
-            Assert.That( instance.Count, Is.EqualTo( 1 ) );
-            Assert.That( instance.HeapPeek(), Is.EqualTo( elem ) );
+            Assert.That( heap.Peek(), Is.EqualTo( elem ) );
+
+			// Store another element with higher priority and insert it as well.
+			elem = new KeyValuePair<float, int>( 2f, 4 );
+            heap.Push( elem );
+
+            // Ensure that the element was inserted into the heap.
+            Assert.That( heap.Peek(), Is.EqualTo( elem ) );
         }
 
 
-        [TestMethod]
+        [Test]
+        public void PushPriorityValue()
+        {
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
+
+            // Ensure that heap is empty.
+            Assert.That( heap.Count, Is.EqualTo( 0 ) );
+
+            // Store an element and insert it into the heap.
+            heap.Push( 1f, 2 );
+
+            // Ensure that the element was inserted into the heap.
+            Assert.That( heap.PeekValue(), Is.EqualTo( 2 ) );
+
+			// Store another element with higher priority and insert it as well.
+            heap.Push( 2f, 4 );
+
+            // Ensure that the element was inserted into the heap.
+            Assert.That( heap.PeekValue(), Is.EqualTo( 4 ) );
+        }
+
+
+        [Test]
         public void Remove() {
 
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+            // Create a new heap.
+            ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Create and store a new element.
-            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 1 );
+            // Create and store a few elements.
+            KeyValuePair<float, int> elem1 = new KeyValuePair<float, int>( 1f, 2 );
+            KeyValuePair<float, int> elem2 = new KeyValuePair<float, int>( 2f, 4 );
+            KeyValuePair<float, int> elem3 = new KeyValuePair<float, int>( 3f, 6 );
 
-            // Expect Remove() to return false, indicating no element was removed.
-            Assert.That( instance.Remove( elem ), Is.False );
+            // Expect Remove() to return false, indicating no element was removed (since the 
+			// heap is empty and obviously can't be removed from).
+			Assert.Throws<InvalidOperationException>( () => {
+				heap.Remove( elem1 );
+			} );
 
-            // Call Add() to insert a new element to the queue as a KeyValuePair.
-            instance.Add( new KeyValuePair<float, int>( 1f, 1 ) );
+            // Insert 2 of the elements into the heap.
+            heap.Push( elem2 );
+            heap.Push( elem3 );
 
-            // Expect Remove() to return true, indicating the element was removed.
-            Assert.That( instance.Remove( elem ), Is.True );
+            // Expect Remove() to return false for elem1, indicating the element was removed
+			// (since it doesn't belong to the heap and can't be found). This tests the if-else 
+			// case for when the provided element isn't found in the heap.
+            Assert.That( heap.Remove( elem1 ), Is.False );
 
-            // Expect Remove() to return false, indicating no element was removed.
-            Assert.That( instance.Remove( elem ), Is.False );
+            // Expect Remove() to return true for elem2, indicating the element was removed
+			// (since it belongs to the heap and can be found). This tests the if-else case for 
+			// when Count is 2 or greater.
+            Assert.That( heap.Remove( elem2 ), Is.True );
+
+            // Expect Remove() to return true for elem3, indicating the element was removed
+			// (since it belongs to the heap and can be found). This tests the if-else case for 
+			// when Count equals 1.
+            Assert.That( heap.Remove( elem3 ), Is.True );
         }
 
-
         #endregion
-
-
-
 
 
         #region Private methods (uncomment these if they have been made public for debugging)
 
+		//[Test]
+		//public void SwapElements()
+		//{
+		//	// Create a new heap.
+		//	ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-        [TestMethod]
-        public
-        void
-        SwapElements()
-        {
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+		//	// Enqueue an element into the queue.
+		//	var elem1 = new KeyValuePair<float, int>( 2f, 4 );
+		//	heap.Push( elem1 );
 
-            // Enqueue an element into the queue.
-            var elem1 = new KeyValuePair<float, T>( 2f, 4 );
-            instance.HeapInsert( elem1 );
+		//	// Ensure that the element was inserted.
+		//	Assert.That( heap.Count, Is.EqualTo( 1 ) );
+		//	Assert.That( heap.Peek(), Is.EqualTo( elem1 ) );
 
-            // Ensure that the element was inserted.
-            Assert.That( instance.Count, Is.EqualTo( 1 ) );
-            Assert.That( instance.HeapPeek(), Is.EqualTo( elem1 ) );
+		//	// Try to HeapSwapElements() while the queue only contains 1 element and expect an
+		//	// InvalidOperationException to be thrown.
+		//	Assert.Throws<InvalidOperationException>( () => {
+		//		heap.SwapElements( 0, 1 );
+		//	} );
 
-            // Try to HeapSwapElements() while the queue only contains 1 element and expect an
-            // InvalidOperationException to be thrown.
-            try
-            {
-                instance.HeapSwapElements( 0, 1 );
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( InvalidOperationException e ) {}
-            catch ( Exception e )
-            {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
+		//	// Enqueue another element with higher priority than the last.
+		//	var elem2 = new KeyValuePair<float, int>( 1f, 2 );
+		//	heap.Push( elem2 );
 
-            // Enqueue another element with higher priority than the last.
-            var elem2 = new KeyValuePair<float, T>( 1f, 2 );
-            instance.HeapInsert( elem2 );
+		//	// Ensure that the element was inserted and that the 1st (higher priority) element is 
+		//	// still at the root of the heap.
+		//	Assert.That( heap.Count, Is.EqualTo( 2 ) );
+		//	Assert.That( heap.Peek(), Is.EqualTo( elem1 ) );
 
-            // Ensure that the element was inserted.
-            Assert.That( instance.Count, Is.EqualTo( 2 ) );
-            Assert.That( instance.HeapPeek(), Is EqualTo( elem2 ) );
+		//	// Try to HeapSwapElements() with an invalid index1 and expect an
+		//	// ArgumentOutOfRangeException to be thrown.
+		//	Assert.Throws<ArgumentOutOfRangeException>( () => {
+		//		heap.SwapElements( -1, 1 );
+		//	} );
 
-            // Try to HeapSwapElements() with an invalid index1 and expect an
-            // ArgumentOutOfRangeException to be thrown.
-            try
-            {
-                instance.HeapSwapElements( -1, 1 );
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( ArgumentOutOfRangeException e ) {}
-            catch ( Exception e )
-            {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
+		//	// Try to HeapSwapElements() with an invalid index2 and expect an
+		//	// ArgumentOutOfRangeException to be thrown.
+		//	Assert.Throws<ArgumentOutOfRangeException>( () => {
+		//		heap.SwapElements( 0, -1 );
+		//	} );
 
-            // Try to HeapSwapElements() with an invalid index2 and expect an
-            // ArgumentOutOfRangeException to be thrown.
-            try
-            {
-                instance.HeapSwapElements( 0, -1 );
-                Assert.Fail( "Expected exception was not thrown!" );
-            }
-            catch ( ArgumentOutOfRangeException e ) {}
-            catch ( Exception e )
-            {
-                Assert.Fail( "Incorrect exception type thrown!" );
-            }
+		//	// Actually swap elements now.
+		//	heap.SwapElements( 0, 1 );
 
-            // Actually swap elements now.
-            instance.HeapSwapElements( 0, 1 );
-
-            // Ensure that the elements were swapped.
-            Assert.That( instance.Count, Is.EqualTo( 2 ) );
-            Assert.That( instance.HeapPeek(), Is.EqualTo( elem1 ) );
-            Assert.That( instance.Contains( elem2 ), Is.True ) );
-        }
+		//	// Ensure that the elements were swapped.
+		//	Assert.That( heap.Count, Is.EqualTo( 2 ) );
+		//	Assert.That( heap.Peek(), Is.EqualTo( elem2 ) );
+		//	Assert.That( heap.Contains( elem1 ), Is.True );
+		//}
 
 
-        // TODO HeapifyBottomUp() test
-        [TestMethod]
-        public
-        void
-        HeapifyBottomUp()
-        {
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+		//[Test]
+		//[Ignore]
+		//public void HeapifyBottomUp()
+		//{
+		//	// TODO The HeapifyBottomUp() test is incomplete.
 
-            // Execute several HeapifyBottomUp()s to test different tree operations on the heap.
-            var index = 0;
-            instance.HeapifyBottomUp( index );
-        }
+		//	// Create a new heap.
+		//	ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
+
+		//	// Execute several HeapifyBottomUp()s to test different tree operations on the heap.
+		//	var index = 0;
+		//	heap.HeapifyBottomUp( index );
+		//}
 
 
-        // TODO HeapifyTopDown() test
-        [TestMethod]
-        public
-        void
-        HeapifyTopDown()
-        {
-            // Create a new priority queue.
-            ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
+		//[Test]
+		//[Ignore]
+		//public void HeapifyTopDown()
+		//{
+		//	// TODO The HeapifyTopDown() test is incomplete.
 
-            // Execute several HeapifyBottomUp()s to test different tree operations on the heap.
-            var index = 0;
-            instance.HeapifyTopDown( index );
-        }
+		//	// Create a new heap.
+		//	ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
+		//	// Execute several HeapifyBottomUp()s to test different tree operations on the heap.
+		//	var index = 0;
+		//	heap.HeapifyTopDown( index );
+		//}
 
         #endregion
+	}
+}

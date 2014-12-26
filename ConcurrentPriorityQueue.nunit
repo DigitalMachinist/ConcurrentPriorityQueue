@@ -1,0 +1,5 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" processModel="Default" domainUsage="Default" appbase="C:\Development\_GitHub\ConcurrentPriorityQueue" />
+  <Config name="Debug" binpathtype="Auto" />
+  <Config name="Release" binpathtype="Auto" />
+</NUnitProject>

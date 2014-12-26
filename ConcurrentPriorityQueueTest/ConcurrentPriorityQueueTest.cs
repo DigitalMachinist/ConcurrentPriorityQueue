@@ -1,17 +1,15 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace Axon.Collections
 {
-    [TestClass]
+    [TestFixture]
     public class ConcurrentPriorityQueueTest
     {
-
-
         #region Instance members
 
-
-        [TestMethod]
+        [Test]
         public void PropertyCapacity()
         {
             // Create a new priority queue.
@@ -31,7 +29,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void PropertyCount()
         {
             // Create a new priority queue.
@@ -50,7 +48,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void PropertyIsEmpty()
         {
             // Create a new priority queue.
@@ -67,7 +65,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void PropertyIsReadOnly()
         {
             // Create a new priority queue.
@@ -77,20 +75,13 @@ namespace Axon.Collections
             Assert.That( instance.IsReadOnly, Is.False );
         }
 
-
         #endregion
-
-
-
 
 
         #region Constructors
 
-
-        [TestMethod]
-        public
-        void
-        ConstructorParameterless()
+        [Test]
+		public void ConstructorParameterless()
         {
             // Create a new priority queue.
             ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>();
@@ -100,18 +91,13 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
-        public
-        void
-        ConstructorInitialSize()
+        [Test]
+        public void ConstructorInitialSize()
         {
-            // Declare a priority queue var, but don't assign it yet.
-            ConcurrentPriorityQueue<int> instance;
-
             // Try to create a priority queue with a negative initial size and expect
             // an InvalidOperationException to be thrown.
             try {
-                instance = new ConcurrentPriorityQueue<int>( -10 );
+                new ConcurrentPriorityQueue<int>( -10 );
                 Assert.Fail( "Expected exception was not thrown!" );
             }
             catch ( InvalidOperationException e ) {}
@@ -123,20 +109,15 @@ namespace Axon.Collections
             ConcurrentPriorityQueue<int> instance = new ConcurrentPriorityQueue<int>( 15 );
 
             // Ensure that Capacity reports 15.
-            System.Assert.AreEqual( instance.Capacity, 15 );
+            Assert.AreEqual( instance.Capacity, 15 );
         }
-
 
         #endregion
 
 
-
-
-
         #region Public API
 
-
-        [TestMethod]
+        [Test]
         public void Add() {
 
             // Create a new priority queue.
@@ -160,7 +141,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void Clear() {
 
             // Create a new priority queue.
@@ -175,7 +156,7 @@ namespace Axon.Collections
             // cleared from the queue later.
             Assert.That(
                 instance.Dequeue(),
-                Is.NotEqualTo( default( KeyValuePair<float, int> ) )
+                Is.Not.EqualTo( default( KeyValuePair<float, int> ) )
             );
 
             // Clear the queue.
@@ -193,7 +174,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void Contains() {
 
             // Create a new priority queue.
@@ -219,7 +200,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void CopyTo() {
 
             // Create a new priority queue.
@@ -245,7 +226,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void Dequeue() {
 
             // Create a new priority queue.
@@ -275,7 +256,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void DequeueValue() {
 
             // Create a new priority queue.
@@ -304,7 +285,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void Enqueue() {
 
             // Create a new priority queue.
@@ -322,7 +303,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void GetEnumerator() {
 
             // Create a new priority queue.
@@ -340,13 +321,13 @@ namespace Axon.Collections
                 Assert.That( enumerator.Current.Value, Is.EqualTo( 3 ) );
                 enumerator.MoveNext();
                 Assert.That( enumerator.Current.Value, Is.EqualTo( 2 ) );
-                enuSmerator.MoveNext();
+                enumerator.MoveNext();
                 Assert.That( enumerator.Current.Value, Is.EqualTo( 1 ) );
             }
         }
 
 
-        [TestMethod]
+        [Test]
         public void Peek() {
 
             // Create a new priority queue.
@@ -376,7 +357,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void PeekValue() {
 
             // Create a new priority queue.
@@ -405,7 +386,7 @@ namespace Axon.Collections
         }
 
 
-        [TestMethod]
+        [Test]
         public void Remove() {
 
             // Create a new priority queue.
@@ -427,9 +408,6 @@ namespace Axon.Collections
             Assert.That( instance.Remove( elem ), Is.False );
         }
 
-
         #endregion
-
-
     }
 }

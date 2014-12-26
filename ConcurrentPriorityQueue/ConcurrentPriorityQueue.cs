@@ -14,15 +14,12 @@ namespace Axon.Collections
     class ConcurrentPriorityQueue<T>
     : ICollection< KeyValuePair<float, T> >
     {
-
-
         #region Instance members
-
 
         /// <summary>
         /// The heap that implements the priority queue in memory.
         /// </summary>
-        private ConcurrentBinaryMinHeap< KeyValuePair<float, T> > __heap;
+        private ConcurrentBinaryMinHeap<T> __heap;
 
 
         /// <summary>
@@ -34,7 +31,7 @@ namespace Axon.Collections
         /// <summary>
         /// Return the number of elements in the queue.
         /// </summary>
-        public int Count { get {  __heap.Count; } }
+        public int Count { get { return __heap.Count; } }
 
 
         /// <summary>
@@ -49,15 +46,10 @@ namespace Axon.Collections
         /// </summary>
         public bool IsReadOnly { get { return false; } }
 
-
         #endregion
 
 
-
-
-
         #region Constructors
-
 
         /// <summary>
         /// Create a new default priority queue.
@@ -67,7 +59,7 @@ namespace Axon.Collections
         {
             try
             {
-                __heap = new ConcurrentBinaryMinHeap< KeyValuePair<float, T> >();
+                __heap = new ConcurrentBinaryMinHeap<T>();
             }
             catch ( Exception e )
             {
@@ -90,7 +82,7 @@ namespace Axon.Collections
         {
             try
             {
-                __heap = new ConcurrentBinaryMinHeap< KeyValuePair<float, T> >( initialCapacity );
+                __heap = new ConcurrentBinaryMinHeap<T>( initialCapacity );
             }
             catch ( Exception e )
             {
@@ -98,23 +90,15 @@ namespace Axon.Collections
             }
         }
 
-
         #endregion
 
 
-
-
-
         #region Public methods
-
 
         /// <summary>
         /// Enqueues a KeyValuePair as a new element into the queue.
         /// </summary>
         /// <param name="item">KeyValuePair to add as a new element.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown by HeapifyBottomUp() when the given index is out of range.
         /// </exception>
@@ -172,9 +156,6 @@ namespace Axon.Collections
         /// </summary>
         /// <param name="item">The KeyValuePair to locate in the queue.</param>
         /// <returns><c>true</c> if item is found in the queue; otherwise, <c>false</c>.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="NotSupportedException">
         /// Thrown when the heap is in read-only mode.
         /// </exception>
@@ -191,10 +172,7 @@ namespace Axon.Collections
             {
                 throw e;
             }
-            finally
-            {
-                return result;
-            }
+            return result;
         }
 
 
@@ -262,9 +240,6 @@ namespace Axon.Collections
         /// Enqueues an existing KeyValuePair element into the priority queue.
         /// </summary>
         /// <param name="element">A KeyValuePair element.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown by HeapifyBottomUp() when the given index is out of range.
         /// </exception>
@@ -331,15 +306,10 @@ namespace Axon.Collections
 
 
         /// <summary>
-        /// Dequeues the element with the highest priority and returns it as a
-        /// <see cref="KeyValuePair{ float, T }"/>. Throws a
-        /// <see cref="InvalidOperationException"/> if the queue is empty.
+        /// Dequeues the element with the highest priority and returns it.
         /// </summary>
         /// <returns>A KeyValuePair where the key is set to the priority of the dequeued element
         /// and the value is set to the value of the dequeued element.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown by HeapifyTopDown() when the given index is out of range.
         /// </exception>
@@ -371,21 +341,14 @@ namespace Axon.Collections
             {
                 throw e;
             }
-            finally
-            {
-                return result;
-            }
+            return result;
         }
 
 
         /// <summary>
-        /// Dequeues the element with the highest priority and returns its data/value. Throws
-        /// an <see cref="InvalidOperationException"/> if the queue is empty.
+        /// Dequeues the element with the highest priority and returns its value.
         /// </summary>
         /// <returns>The value of the dequeued element.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown by HeapifyTopDown() when the given index is out of range.
         /// </exception>
@@ -417,17 +380,12 @@ namespace Axon.Collections
             {
                 throw e;
             }
-            finally
-            {
-                return result;
-            }
+            return result;
         }
 
 
         /// <summary>
-        /// Returns the element with the highest priority as a
-        /// <see cref="KeyValuePair{ float, T }"/>, but doesn't remove it from the queue.
-        /// Throws a <see cref="InvalidOperationException"/> if the queue is empty.
+        /// Returns the element with the highest priority, but doesn't remove it from the queue.
         /// </summary>
         /// <returns>A KeyValuePair where the key is set to the priority of the dequeued element
         /// and the value is set to the data/value of the dequeued element.</returns>
@@ -447,17 +405,13 @@ namespace Axon.Collections
             {
                 throw e;
             }
-            finally
-            {
-                return result;
-            }
+            return result;
         }
 
 
         /// <summary>
-        /// Returns the value of the element with the highest priority as a
-        /// <see cref="KeyValuePair{ float, T }"/>, but doesn't remove the element from
-        /// the queue. Throws a <see cref="InvalidOperationException"/> if the queue is empty.
+        /// Returns the value of the element with the highest priority, but doesn't remove the 
+		/// element from the queue.
         /// </summary>
         /// <returns>A KeyValuePair where the key is set to the priority of the dequeued element
         /// and the value is set to the data/value of the dequeued element.</returns>
@@ -477,10 +431,7 @@ namespace Axon.Collections
             {
                 throw e;
             }
-            finally
-            {
-                return result;
-            }
+            return result;
         }
 
 
@@ -490,9 +441,6 @@ namespace Axon.Collections
         /// <param name="item">The KeyValuePair element to remove from the queue.</param>
         /// <returns><c>true</c> if item was successfully removed from the priority queue.
         /// This method returns false if item is not found in the collection.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given element is null.
-        /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown by HeapifyTopDown() when the inputs to HeapifyTopDown() are out of range.
         /// </exception>
@@ -524,15 +472,10 @@ namespace Axon.Collections
             {
                 throw e;
             }
-            finally
-            {
-                return result;
-            }
+            return result;
         }
 
 
         #endregion
-
-
     }
 }
