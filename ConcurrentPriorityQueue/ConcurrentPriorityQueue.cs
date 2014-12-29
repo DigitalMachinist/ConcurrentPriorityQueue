@@ -57,19 +57,12 @@ namespace Axon.Collections
         public
         ConcurrentPriorityQueue()
         {
-            try
-            {
-                __heap = new ConcurrentBinaryMinHeap<T>();
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
+            __heap = new ConcurrentBinaryMinHeap<T>();
         }
 
 
         /// <summary>
-        /// Create a new priority queue with the given initial size of the array implementing it
+        /// Create a new priority queue with the given initial size of the heap implementing it
         /// internally.
         /// </summary>
         /// <param name="initialCapacity">The initial size of the heap underlying priority queue.
@@ -208,31 +201,6 @@ namespace Axon.Collections
             {
                 throw e;
             }
-        }
-
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the queue's elements. This enumerator is
-        /// not guaranteed to iterate through elements in sorted order.
-        /// </summary>
-        /// <returns>An generic enumerator of the queue's contents.</returns>
-        public
-        IEnumerator< KeyValuePair<float, T> >
-        GetEnumerator()
-        {
-            return __heap.GetEnumerator();
-        }
-
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the queue's elements. This enumerator is
-        /// not guaranteed to iterate through elements in sorted order.
-        /// </summary>
-        /// <returns>An enumerator of the queue's contents.</returns>
-        IEnumerator
-        IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
         }
 
 
@@ -381,6 +349,31 @@ namespace Axon.Collections
                 throw e;
             }
             return result;
+        }
+
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the queue's elements. This enumerator is
+        /// not guaranteed to iterate through elements in sorted order.
+        /// </summary>
+        /// <returns>An generic enumerator of the queue's contents.</returns>
+        public
+        IEnumerator< KeyValuePair<float, T> >
+        GetEnumerator()
+        {
+            return __heap.GetEnumerator();
+        }
+
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the queue's elements. This enumerator is
+        /// not guaranteed to iterate through elements in sorted order.
+        /// </summary>
+        /// <returns>An enumerator of the queue's contents.</returns>
+        IEnumerator
+        IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
 

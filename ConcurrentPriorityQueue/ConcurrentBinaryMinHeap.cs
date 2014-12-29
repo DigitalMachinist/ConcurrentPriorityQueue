@@ -679,7 +679,7 @@ namespace Axon.Collections
         #endregion
 
 
-        #region Private methods
+        #region Private methods (these are conditionally compiled as public for DEBUG builds)
 
         /// <summary>
         /// Swap the heap element at index1 with the heap element at index2.
@@ -695,8 +695,12 @@ namespace Axon.Collections
         /// <exception cref="InvalidOperationException">
         /// Thrown when the heap contains less than 2 elements.
         /// </exception>
-        private
-        void
+		#if DEBUG
+		public
+		#else
+		private
+		#endif
+		void
         SwapElements( int index1, int index2 )
         {
             if ( __data.Count < 2 )
@@ -751,7 +755,11 @@ namespace Axon.Collections
         /// <remarks>
         /// See Inspiration.cs HeapifyFromEndToBeginning() for the original algorithm.
         /// </remarks>
-        private
+		#if DEBUG
+		public
+		#else
+		private
+		#endif
         int
         HeapifyBottomUp( int index )
         {
@@ -825,7 +833,11 @@ namespace Axon.Collections
         /// <remarks>
         /// See Inspiration.cs HeapifyFromBeginningToEnd() for the original algorithm.
         /// </remarks>
-        private
+		#if DEBUG
+		public
+		#else
+		private
+		#endif
         void
         HeapifyTopDown( int index )
         {

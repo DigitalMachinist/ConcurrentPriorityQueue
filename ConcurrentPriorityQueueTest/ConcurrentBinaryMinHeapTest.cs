@@ -54,13 +54,13 @@ namespace Axon.Collections
             // Create a new heap.
             ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Ensure that Count reports TRUE.
+            // Ensure that IsEmpty reports TRUE.
             Assert.That( heap.IsEmpty, Is.True );
 
             // Enqueue an element in the queue.
             heap.Push( 1f, 1 );
 
-            // Ensure that Count now reports FALSE..
+            // Ensure that IsEmpty now reports FALSE.
             Assert.That( heap.IsEmpty, Is.False );
         }
 
@@ -71,7 +71,7 @@ namespace Axon.Collections
             // Create a new heap.
             ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Ensure that Count always reports FALSE.
+            // Ensure that IsReadOnly always reports FALSE.
             Assert.That( heap.IsReadOnly, Is.False );
         }
 
@@ -126,7 +126,7 @@ namespace Axon.Collections
             // Call Add() to insert a new element to the queue as a KeyValuePair.
             heap.Add( new KeyValuePair<float, int>( 1f, 2 ) );
 
-            // Expect a value of 1 on the first item to be removed after adding it.
+            // Expect a value of 2 on the first item to be removed after adding it.
             Assert.That( heap.PopValue(), Is.EqualTo( 2 ) );
         }
 
@@ -137,7 +137,7 @@ namespace Axon.Collections
             // Create a new heap.
             ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Enqueue 3 elements into the queue.
+            // Push 3 elements onto the heap.
             heap.Push( 1f, 2 );
             heap.Push( 3f, 6 );
             heap.Push( 2f, 4 );
@@ -145,7 +145,7 @@ namespace Axon.Collections
             // Ensure that 3 elements have been added to the heap.
             Assert.That( heap.Count, Is.EqualTo( 3 ) );
 
-            // Clear the queue.
+            // Clear the heap.
             heap.Clear();
 
             // Ensure that all of the elements have been removed.
@@ -165,7 +165,7 @@ namespace Axon.Collections
             // Ensure the queue contains the element.
             Assert.That( heap.Contains( elem ), Is.False );
 
-            // Enqueue it in the queue.
+            // Push it onto the heap.
             heap.Push( elem );
 
             // Ensure the queue now contains the element.
@@ -179,18 +179,21 @@ namespace Axon.Collections
             // Create a new heap.
             ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Create a new array of size 4.
+            // Create a new array of size 5.
             KeyValuePair<float, int>[] arrayCopy = new KeyValuePair<float, int>[ 5 ];
 
-            // Enqueue 3 elements in the queue.
+            // Push 3 elements onto the queue.
             heap.Push( 1f, 2 );
             heap.Push( 3f, 6 );
             heap.Push( 2f, 4 );
 
-            // Copy the queue data to the array, starting from index 1 (not 0).
+            // Copy the heap data to the array, starting from index 1 (not 0).
             heap.CopyTo( arrayCopy, 1 );
 
             // Expect the first array index to be unset, but all the rest to be set.
+			// Note: The order of elements after the first can't be guaranteed, because the heap 
+			// doesn't store things in an exact linear order, but we can be sure that the elements 
+			// aren't going to be equal to a default KeyValuePair because we set them.
             Assert.That( arrayCopy[ 0 ], Is.EqualTo( default( KeyValuePair<float, int> ) ) );
             Assert.That( arrayCopy[ 1 ], Is.EqualTo( new KeyValuePair<float, int>( 3f, 6 ) ) );
             Assert.That( arrayCopy[ 2 ], Is.Not.EqualTo( default( KeyValuePair<float, int> ) ) );
@@ -211,11 +214,14 @@ namespace Axon.Collections
             heap.Push( 2f, 4 );
 
             // Use the enumerator of heap (using disposes it when we're finished).
-            using ( var enumerator = heap.GetEnumerator() )
+            using ( IEnumerator< KeyValuePair<float, int> > enumerator = heap.GetEnumerator() )
             {
                 // Expect the first element to have the highest priority, and expect MoveNext() to 
 				// return true until the last element. After the end of the heap is reached, it 
 				// then returns false.
+				// Note: Since the heap doesn't guarantee the order of elements after the first, we 
+				// can only be certain of the root element and after that we really can't be sure 
+				// of the order -- just the length.
                 Assert.That( enumerator.MoveNext(), Is.True );
                 Assert.That( enumerator.Current.Value, Is.EqualTo( 6 ) );
                 Assert.That( enumerator.MoveNext(), Is.True );
@@ -231,7 +237,7 @@ namespace Axon.Collections
             // Create a new heap.
             ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Try to HeapPeek() and expect an InvalidOperationException to be thrown.
+            // Try to Peek() and expect an InvalidOperationException to be thrown.
 			Assert.Throws<InvalidOperationException>( () => {
 				heap.Peek();
 			} );
@@ -251,7 +257,7 @@ namespace Axon.Collections
             KeyValuePair<float, int> elem2 = new KeyValuePair<float, int>( 2f, 4 );
             heap.Push( elem2 );
 
-            // Ensure that HeapPeak() returns the new root element.
+            // Ensure that Peak() returns the new root element.
             Assert.That( heap.Peek(), Is.EqualTo( elem2 ) );
         }
 
@@ -278,8 +284,7 @@ namespace Axon.Collections
             Assert.That( heap.Count, Is.EqualTo( 1 ) );
             Assert.That( heap.Peek(), Is.EqualTo( elem ) );
 
-            // Ensure that the returned element points to the same object as the reference we
-            // stored earlier.
+            // Ensure that the returned element points to the same object we stored earlier.
             Assert.That( heap.Pop(), Is.EqualTo( elem ) );
 
             // Ensure that the element was removed from the heap.
@@ -293,9 +298,9 @@ namespace Axon.Collections
             // Create a new heap.
             ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-            // Try to Pop() and expect an InvalidOperationException to be thrown.
+            // Try to PopValue() and expect an InvalidOperationException to be thrown.
 			Assert.Throws<InvalidOperationException>( () => {
-				heap.Pop();
+				heap.PopValue();
 			} );
 
             // Ensure that the heap is empty.
@@ -308,9 +313,8 @@ namespace Axon.Collections
             // Ensure that the element was inserted into the heap.
             Assert.That( heap.Peek(), Is.EqualTo( elem ) );
 
-            // Ensure that the returned element points to the same object as the reference we
-            // stored earlier.
-            Assert.That( heap.Pop(), Is.EqualTo( elem ) );
+            // Ensure that the value of the pushed element is returned.
+            Assert.That( heap.PopValue(), Is.EqualTo( 2 ) );
 
             // Ensure that the element was removed from the heap.
             Assert.That( heap.Count, Is.EqualTo( 0 ) );
@@ -336,8 +340,8 @@ namespace Axon.Collections
 			// Store another element with higher priority and insert it as well.
 			elem = new KeyValuePair<float, int>( 2f, 4 );
             heap.Push( elem );
-
-            // Ensure that the element was inserted into the heap.
+			
+            // Ensure that the element was inserted into the queue and is at the root.
             Assert.That( heap.Peek(), Is.EqualTo( elem ) );
         }
 
@@ -405,87 +409,93 @@ namespace Axon.Collections
         #endregion
 
 
-        #region Private methods (uncomment these if they have been made public for debugging)
+        #region Private methods (these are testable as public methods in DEBUG builds)
 
-		//[Test]
-		//public void SwapElements()
-		//{
-		//	// Create a new heap.
-		//	ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
+		#if DEBUG
+		[Test]
+		public void SwapElements()
+		{
+			// Create a new heap.
+			ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-		//	// Enqueue an element into the queue.
-		//	var elem1 = new KeyValuePair<float, int>( 2f, 4 );
-		//	heap.Push( elem1 );
+			// Enqueue an element into the queue.
+			var elem1 = new KeyValuePair<float, int>( 2f, 4 );
+			heap.Push( elem1 );
 
-		//	// Ensure that the element was inserted.
-		//	Assert.That( heap.Count, Is.EqualTo( 1 ) );
-		//	Assert.That( heap.Peek(), Is.EqualTo( elem1 ) );
+			// Ensure that the element was inserted.
+			Assert.That( heap.Count, Is.EqualTo( 1 ) );
+			Assert.That( heap.Peek(), Is.EqualTo( elem1 ) );
 
-		//	// Try to HeapSwapElements() while the queue only contains 1 element and expect an
-		//	// InvalidOperationException to be thrown.
-		//	Assert.Throws<InvalidOperationException>( () => {
-		//		heap.SwapElements( 0, 1 );
-		//	} );
+			// Try to HeapSwapElements() while the queue only contains 1 element and expect an
+			// InvalidOperationException to be thrown.
+			Assert.Throws<InvalidOperationException>( () => {
+				heap.SwapElements( 0, 1 );
+			} );
 
-		//	// Enqueue another element with higher priority than the last.
-		//	var elem2 = new KeyValuePair<float, int>( 1f, 2 );
-		//	heap.Push( elem2 );
+			// Enqueue another element with higher priority than the last.
+			var elem2 = new KeyValuePair<float, int>( 1f, 2 );
+			heap.Push( elem2 );
 
-		//	// Ensure that the element was inserted and that the 1st (higher priority) element is 
-		//	// still at the root of the heap.
-		//	Assert.That( heap.Count, Is.EqualTo( 2 ) );
-		//	Assert.That( heap.Peek(), Is.EqualTo( elem1 ) );
+			// Ensure that the element was inserted and that the 1st (higher priority) element is 
+			// still at the root of the heap.
+			Assert.That( heap.Count, Is.EqualTo( 2 ) );
+			Assert.That( heap.Peek(), Is.EqualTo( elem1 ) );
 
-		//	// Try to HeapSwapElements() with an invalid index1 and expect an
-		//	// ArgumentOutOfRangeException to be thrown.
-		//	Assert.Throws<ArgumentOutOfRangeException>( () => {
-		//		heap.SwapElements( -1, 1 );
-		//	} );
+			// Try to HeapSwapElements() with an invalid index1 and expect an
+			// ArgumentOutOfRangeException to be thrown.
+			Assert.Throws<ArgumentOutOfRangeException>( () => {
+				heap.SwapElements( -1, 1 );
+			} );
 
-		//	// Try to HeapSwapElements() with an invalid index2 and expect an
-		//	// ArgumentOutOfRangeException to be thrown.
-		//	Assert.Throws<ArgumentOutOfRangeException>( () => {
-		//		heap.SwapElements( 0, -1 );
-		//	} );
+			// Try to HeapSwapElements() with an invalid index2 and expect an
+			// ArgumentOutOfRangeException to be thrown.
+			Assert.Throws<ArgumentOutOfRangeException>( () => {
+				heap.SwapElements( 0, -1 );
+			} );
 
-		//	// Actually swap elements now.
-		//	heap.SwapElements( 0, 1 );
+			// Actually swap elements now.
+			heap.SwapElements( 0, 1 );
 
-		//	// Ensure that the elements were swapped.
-		//	Assert.That( heap.Count, Is.EqualTo( 2 ) );
-		//	Assert.That( heap.Peek(), Is.EqualTo( elem2 ) );
-		//	Assert.That( heap.Contains( elem1 ), Is.True );
-		//}
-
-
-		//[Test]
-		//[Ignore]
-		//public void HeapifyBottomUp()
-		//{
-		//	// TODO The HeapifyBottomUp() test is incomplete.
-
-		//	// Create a new heap.
-		//	ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
-
-		//	// Execute several HeapifyBottomUp()s to test different tree operations on the heap.
-		//	var index = 0;
-		//	heap.HeapifyBottomUp( index );
-		//}
+			// Ensure that the elements were swapped.
+			Assert.That( heap.Count, Is.EqualTo( 2 ) );
+			Assert.That( heap.Peek(), Is.EqualTo( elem2 ) );
+			Assert.That( heap.Contains( elem1 ), Is.True );
+		}
+		#endif
 
 
-		//[Test]
-		//[Ignore]
-		//public void HeapifyTopDown()
-		//{
-		//	// TODO The HeapifyTopDown() test is incomplete.
+		#if DEBUG
+		[Test]
+		[Ignore]
+		public void HeapifyBottomUp()
+		{
+			// TODO The HeapifyBottomUp() test is incomplete.
 
-		//	// Create a new heap.
-		//	ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
+			// Create a new heap.
+			ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
 
-		//	// Execute several HeapifyBottomUp()s to test different tree operations on the heap.
-		//	var index = 0;
-		//	heap.HeapifyTopDown( index );
-		//}
+			// Execute several HeapifyBottomUp()s to test different tree operations on the heap.
+			var index = 0;
+			heap.HeapifyBottomUp( index );
+		}
+		#endif
+
+
+		#if DEBUG
+		[Test]
+		[Ignore]
+		public void HeapifyTopDown()
+		{
+			// TODO The HeapifyTopDown() test is incomplete.
+
+			// Create a new heap.
+			ConcurrentBinaryMinHeap<int> heap = new ConcurrentBinaryMinHeap<int>();
+
+			// Execute several HeapifyBottomUp()s to test different tree operations on the heap.
+			var index = 0;
+			heap.HeapifyTopDown( index );
+		}
+		#endif
 
         #endregion
 	}
