@@ -6,7 +6,7 @@
     <ProjectGuid>{805DFF42-5CFA-4583-85C9-91F7E80C521B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConcurrentPriorityQueueTest</RootNamespace>
+    <RootNamespace>Axon.Collections</RootNamespace>
     <AssemblyName>ConcurrentPriorityQueueTest</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -52,7 +52,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConcurrentBinaryMinHeapTest.cs" />
     <Compile Include="ConcurrentPriorityQueueTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

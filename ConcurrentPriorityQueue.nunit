@@ -2,5 +2,6 @@
   <Settings activeconfig="Default" />
   <Config name="Default" binpathtype="Auto">
     <assembly path="ConcurrentPriorityQueueTest\bin\Debug\ConcurrentPriorityQueueTest.dll" />
+    <assembly path="ConcurrentPriorityQueueTest\bin\Release\ConcurrentPriorityQueueTest.dll" />
   </Config>
 </NUnitProject>
