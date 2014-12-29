@@ -37,10 +37,10 @@ As of the time of writing, I have not yet written any tests to validate concurre
 
 If I missed anything, please let me know or submit a PR.
 
-# Developer
+## Developer
 
  Written by Jeff Rose (jrose0@gmail.com)
 
-# License
+## License
 
 Licensed under the MIT License. See the LICENSE file for more information.
