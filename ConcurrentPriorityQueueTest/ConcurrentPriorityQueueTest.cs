@@ -118,13 +118,11 @@ namespace Axon.Collections
             // Create a new priority queue.
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
-            // Try to Dequeue() and expect an InvalidOperationException to be thrown.
-			Assert.Throws<InvalidOperationException>( () => {
-				queue.Dequeue();
-			} );
+            // Ensure that the queue is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
 
             // Call Add() to insert a new element to the queue as a KeyValuePair.
-            queue.Add( new KeyValuePair<float, int>( 1f, 2 ) );
+            queue.Add( new PriorityValuePair<int>( 1f, 2 ) );
 
             // Expect a value of 2 on the first item to be removed after adding it.
             Assert.That( queue.DequeueValue(), Is.EqualTo( 2 ) );
@@ -160,7 +158,7 @@ namespace Axon.Collections
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
             // Create and store a new element.
-            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
+            PriorityValuePair<int> elem = new PriorityValuePair<int>( 1f, 2 );
 
             // Ensure the queue contains the element.
             Assert.That( queue.Contains( elem ), Is.False );
@@ -180,11 +178,12 @@ namespace Axon.Collections
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
             // Create a new array of size 5.
-            KeyValuePair<float, int>[] arrayCopy = new KeyValuePair<float, int>[ 5 ];
+            PriorityValuePair<int>[] arrayCopy = new PriorityValuePair<int>[ 5 ];
 
             // Enqueue 3 elements into the queue.
+			PriorityValuePair<int> elem = new PriorityValuePair<int>( 3f, 6 );
             queue.Enqueue( 1f, 2 );
-            queue.Enqueue( 3f, 6 );
+            queue.Enqueue( elem );
             queue.Enqueue( 2f, 4 );
 
             // Copy the queue data to the array, starting from index 1 (not 0).
@@ -193,13 +192,13 @@ namespace Axon.Collections
             // Expect the first array index to be unset, but all the rest to be set.
 			// Note: The order of elements after the first can't be guaranteed, because the heap 
 			// implementing the queue internally doesn't store things in an exact linear order, 
-			// but we can be sure that the elements aren't going to be equal to a default 
-			// KeyValuePair because we set them.
-            Assert.That( arrayCopy[ 0 ], Is.EqualTo( default( KeyValuePair<float, int> ) ) );
-            Assert.That( arrayCopy[ 1 ], Is.EqualTo( new KeyValuePair<float, int>( 3f, 6 ) ) );
-            Assert.That( arrayCopy[ 2 ], Is.Not.EqualTo( default( KeyValuePair<float, int> ) ) );
-            Assert.That( arrayCopy[ 3 ], Is.Not.EqualTo( default( KeyValuePair<float, int> ) ) );
-            Assert.That( arrayCopy[ 4 ], Is.EqualTo( default( KeyValuePair<float, int> ) ) );
+			// but we can be sure that the elements aren't going to be equal to null because we 
+			// set them.
+            Assert.That( arrayCopy[ 0 ], Is.EqualTo( null ) );
+            Assert.That( arrayCopy[ 1 ], Is.EqualTo( elem ) );
+            Assert.That( arrayCopy[ 2 ], Is.Not.EqualTo( null ) );
+            Assert.That( arrayCopy[ 3 ], Is.Not.EqualTo( null ) );
+            Assert.That( arrayCopy[ 4 ], Is.EqualTo( null ) );
         }
 
 
@@ -209,16 +208,17 @@ namespace Axon.Collections
             // Create a new priority queue.
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
-            // Try to Dequeue() and expect an InvalidOperationException to be thrown.
-			Assert.Throws<InvalidOperationException>( () => {
-				queue.Dequeue();
-			} );
+            // Ensure that the heap is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+			
+			// Expect Dequeue() to return null for an empty heap.
+            Assert.That( queue.Dequeue(), Is.EqualTo( null ) );
 
             // Ensure that the heap is empty.
             Assert.That( queue.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the heap.
-            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
+            PriorityValuePair<int> elem = new PriorityValuePair<int>( 1f, 2 );
             queue.Enqueue( elem );
 
             // Ensure that the element was inserted into the heap.
@@ -234,13 +234,49 @@ namespace Axon.Collections
 
 
         [Test]
+        public void DequeuePriority() 
+		{
+            // Create a new priority queue.
+            ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
+
+            // Ensure that the heap is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+
+            // Try to DequeuePriority() and expect an NullReferenceException to be thrown.
+			Assert.Throws<NullReferenceException>( () => {
+				queue.DequeuePriority();
+			} );
+
+            // Ensure that the heap is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+
+            // Store an element and insert it into the heap.
+            PriorityValuePair<int> elem = new PriorityValuePair<int>( 1f, 2 );
+            queue.Enqueue( elem );
+
+            // Ensure that the element was inserted into the heap.
+            Assert.That( queue.Count, Is.EqualTo( 1 ) );
+            Assert.That( queue.Peek(), Is.EqualTo( elem ) );
+
+            // Ensure that the value of the enqueued element is returned.
+            Assert.That( queue.DequeuePriority(), Is.EqualTo( 1f ) );
+
+            // Ensure that the element was removed from the heap.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+        }
+
+
+        [Test]
         public void DequeueValue() 
 		{
             // Create a new priority queue.
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
-            // Try to DequeueValue() and expect an InvalidOperationException to be thrown.
-			Assert.Throws<InvalidOperationException>( () => {
+            // Ensure that the heap is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+
+            // Try to DequeueValue() and expect an NullReferenceException to be thrown.
+			Assert.Throws<NullReferenceException>( () => {
 				queue.DequeueValue();
 			} );
 
@@ -248,7 +284,7 @@ namespace Axon.Collections
             Assert.That( queue.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the heap.
-            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
+            PriorityValuePair<int> elem = new PriorityValuePair<int>( 1f, 2 );
             queue.Enqueue( elem );
 
             // Ensure that the element was inserted into the heap.
@@ -273,14 +309,14 @@ namespace Axon.Collections
             Assert.That( queue.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the queue.
-            KeyValuePair<float, int> elem = new KeyValuePair<float, int>( 1f, 2 );
+            PriorityValuePair<int> elem = new PriorityValuePair<int>( 1f, 2 );
             queue.Enqueue( elem );
 
             // Ensure that the element was inserted into the queue.
             Assert.That( queue.Peek(), Is.EqualTo( elem ) );
 
 			// Store another element with higher priority and insert it as well.
-			elem = new KeyValuePair<float, int>( 2f, 4 );
+			elem = new PriorityValuePair<int>( 2f, 4 );
             queue.Enqueue( elem );
 
             // Ensure that the element was inserted into the queue and is at the front.
@@ -323,7 +359,7 @@ namespace Axon.Collections
             queue.Enqueue( 2f, 4 );
 
             // Use the enumerator of queue (using disposes it when we're finished).
-            using ( IEnumerator< KeyValuePair<float, int> > enumerator = queue.GetEnumerator() )
+            using ( IEnumerator< PriorityValuePair<int> > enumerator = queue.GetEnumerator() )
             {
                 // Expect the first element to have the highest priority, and expect MoveNext() to 
 				// return true until the last element. After the end of the heap is reached, it 
@@ -346,28 +382,67 @@ namespace Axon.Collections
             // Create a new priority queue.
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
-            // Try to Peek() and expect an InvalidOperationException to be thrown.
-			Assert.Throws<InvalidOperationException>( () => {
-				queue.Peek();
-			} );
+            // Ensure that the heap is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+			
+			// Expect Peek() to return null for an empty heap.
+            Assert.That( queue.Peek(), Is.EqualTo( null ) );
 
             // Ensure that the queue is empty.
             Assert.That( queue.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the queue.
-            KeyValuePair<float, int> elem1 = new KeyValuePair<float, int>( 1f, 2 );
+            PriorityValuePair<int> elem1 = new PriorityValuePair<int>( 1f, 2 );
             queue.Enqueue( elem1 );
 
             // Ensure that the element was inserted into the queue at the front.
             Assert.That( queue.Count, Is.EqualTo( 1 ) );
             Assert.That( queue.Peek(), Is.EqualTo( elem1 ) );
 
+            // Ensure that the element was not removed from the heap.
+            Assert.That( queue.Count, Is.EqualTo( 1 ) );
+
             // Insert another element with higher priority than the last.
-            KeyValuePair<float, int> elem2 = new KeyValuePair<float, int>( 2f, 4 );
+            PriorityValuePair<int> elem2 = new PriorityValuePair<int>( 2f, 4 );
             queue.Enqueue( elem2 );
 
             // Ensure that Peak() returns the new front element.
             Assert.That( queue.Peek(), Is.EqualTo( elem2 ) );
+        }
+
+
+        [Test]
+        public void PeekPriority() {
+
+            // Create a new priority queue.
+            ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
+
+            // Ensure that the heap is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+
+            // Try to PeekValue() and expect an NullReferenceException to be thrown.
+			Assert.Throws<NullReferenceException>( () => {
+				queue.PeekPriority();
+			} );
+
+            // Ensure that the queue is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+
+            // Store an element and insert it into the queue.
+            queue.Enqueue( new PriorityValuePair<int>( 1f, 2 ) );
+
+            // Ensure that the element was inserted into the queue at the front.
+            Assert.That( queue.Count, Is.EqualTo( 1 ) );
+            Assert.That( queue.PeekPriority(), Is.EqualTo( 1f ) );
+
+            // Ensure that the element was not removed from the heap.
+            Assert.That( queue.Count, Is.EqualTo( 1 ) );
+
+            // Insert another element with higher priority than the last.
+            queue.Enqueue( new PriorityValuePair<int>( 2f, 4 ) );
+
+            // Ensure that Peak() returns the new front element's value.
+            Assert.That( queue.PeekPriority(), Is.EqualTo( 2f ) );
         }
 
 
@@ -377,23 +452,29 @@ namespace Axon.Collections
             // Create a new priority queue.
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
-            // Try to Peek() and expect an InvalidOperationException to be thrown.
-			Assert.Throws<InvalidOperationException>( () => {
-				queue.Peek();
+            // Ensure that the heap is empty.
+            Assert.That( queue.Count, Is.EqualTo( 0 ) );
+
+            // Try to PeekValue() and expect an NullReferenceException to be thrown.
+			Assert.Throws<NullReferenceException>( () => {
+				queue.PeekValue();
 			} );
 
             // Ensure that the queue is empty.
             Assert.That( queue.Count, Is.EqualTo( 0 ) );
 
             // Store an element and insert it into the queue.
-            queue.Enqueue( new KeyValuePair<float, int>( 1f, 2 ) );
+            queue.Enqueue( new PriorityValuePair<int>( 1f, 2 ) );
 
             // Ensure that the element was inserted into the queue at the front.
             Assert.That( queue.Count, Is.EqualTo( 1 ) );
             Assert.That( queue.PeekValue(), Is.EqualTo( 2 ) );
 
+            // Ensure that the element was not removed from the heap.
+            Assert.That( queue.Count, Is.EqualTo( 1 ) );
+
             // Insert another element with higher priority than the last.
-            queue.Enqueue( new KeyValuePair<float, int>( 2f, 4 ) );
+            queue.Enqueue( new PriorityValuePair<int>( 2f, 4 ) );
 
             // Ensure that Peak() returns the new front element's value.
             Assert.That( queue.PeekValue(), Is.EqualTo( 4 ) );
@@ -407,15 +488,12 @@ namespace Axon.Collections
             ConcurrentPriorityQueue<int> queue = new ConcurrentPriorityQueue<int>();
 
             // Create and store a few elements.
-            KeyValuePair<float, int> elem1 = new KeyValuePair<float, int>( 1f, 2 );
-            KeyValuePair<float, int> elem2 = new KeyValuePair<float, int>( 2f, 4 );
-            KeyValuePair<float, int> elem3 = new KeyValuePair<float, int>( 3f, 6 );
+            PriorityValuePair<int> elem1 = new PriorityValuePair<int>( 1f, 2 );
+            PriorityValuePair<int> elem2 = new PriorityValuePair<int>( 2f, 4 );
+            PriorityValuePair<int> elem3 = new PriorityValuePair<int>( 3f, 6 );
 
-            // Expect Remove() to return false, indicating no element was removed (since the 
-			// heap is empty and obviously can't be removed from).
-			Assert.Throws<InvalidOperationException>( () => {
-				queue.Remove( elem1 );
-			} );
+            // Expect Remove() to return false for an empty queue.
+            Assert.That( queue.Remove( elem1 ), Is.False );
 
             // Enqueue 2 of the elements into the heap.
             queue.Enqueue( elem2 );

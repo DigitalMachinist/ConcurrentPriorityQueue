@@ -12,7 +12,7 @@ namespace Axon.Collections
     /// <typeparam name="T">The type of data to be queued.</typeparam>
     public
     class ConcurrentPriorityQueue<T>
-    : ICollection< KeyValuePair<float, T> >
+    : ICollection< PriorityValuePair<T> >
     {
         #region Instance members
 
@@ -89,83 +89,38 @@ namespace Axon.Collections
         #region Public methods
 
         /// <summary>
-        /// Enqueues a KeyValuePair as a new element into the queue.
+        /// Enqueues a PriorityValuePair as a new element into the queue.
         /// </summary>
-        /// <param name="item">KeyValuePair to add as a new element.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by HeapifyBottomUp() when the given index is out of range.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by SwapElements() when the inputs to SwapElements() are invalid.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by SwapElements() when there are less than 2 elements in the heap.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by HeapifyBottomUp() when the heap is empty.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Thrown by List.Add() when the heap is in read-only mode.
-        /// </exception>
+        /// <param name="item">PriorityValuePair to add as a new element.</param>
         public
         void
-        Add( KeyValuePair<float, T> element )
+        Add( PriorityValuePair<T> element )
         {
-            try
-            {
-                __heap.Add( element );
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
+            __heap.Add( element );
         }
 
 
         /// <summary>
         /// Clears the queue of all elements.
         /// </summary>
-        /// <exception cref="NotSupportedException">
-        /// Thrown when the heap is in read-only mode.
-        /// </exception>
         public
         void
         Clear()
         {
-            // No exceptions can be thrown by HeapClear().
-            try
-            {
-                __heap.Clear();
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
+            __heap.Clear();
         }
 
 
         /// <summary>
-        /// Returns whether or not the queue contains the given KeyValuePair element.
+        /// Returns whether or not the queue contains the given PriorityValuePair element.
         /// </summary>
-        /// <param name="item">The KeyValuePair to locate in the queue.</param>
+        /// <param name="item">The PriorityValuePair to locate in the queue.</param>
         /// <returns><c>true</c> if item is found in the queue; otherwise, <c>false</c>.</returns>
-        /// <exception cref="NotSupportedException">
-        /// Thrown when the heap is in read-only mode.
-        /// </exception>
         public
         bool
-        Contains( KeyValuePair<float, T> element )
+        Contains( PriorityValuePair<T> element )
         {
-            bool result = false;
-            try
-            {
-                result = __heap.Contains( element );
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
-            return result;
+            return __heap.Contains( element );
         }
 
 
@@ -176,65 +131,23 @@ namespace Axon.Collections
         /// <param name="array">The one-dimensional Array that is the destination of the elements
         /// copied from the priority queue. The Array must have zero-based indexing. </param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the given array is null.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when the given index is less than 0.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Thrown if the given array is multi-dimensional.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Thrown if there is not enough space in the array from arrayIndex to the end to hold the
-        /// heap data to be copied.
-        /// </exception>
         public
         void
-        CopyTo( KeyValuePair<float, T>[] array, int arrayIndex )
+        CopyTo( PriorityValuePair<T>[] array, int arrayIndex )
         {
-            try
-            {
-                __heap.CopyTo( array, arrayIndex );
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
+            __heap.CopyTo( array, arrayIndex );
         }
 
 
         /// <summary>
-        /// Enqueues an existing KeyValuePair element into the priority queue.
+        /// Enqueues an existing PriorityValuePair element into the priority queue.
         /// </summary>
-        /// <param name="element">A KeyValuePair element.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by HeapifyBottomUp() when the given index is out of range.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by SwapElements() when the inputs to SwapElements() are invalid.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by SwapElements() when there are less than 2 elements in the heap.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by HeapifyBottomUp() when the heap is empty.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Thrown by Add() when the heap is in read-only mode.
-        /// </exception>
+        /// <param name="element">A PriorityValuePair element.</param>
         public
         void
-        Enqueue( KeyValuePair<float, T> element )
+        Enqueue( PriorityValuePair<T> element )
         {
-            try
-            {
-                __heap.Push( element );
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
+            __heap.Push( element );
         }
 
 
@@ -243,73 +156,36 @@ namespace Axon.Collections
         /// </summary>
         /// <param name="priority">A float priority.</param>
         /// <param name="value">A generically-typed object.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by HeapifyBottomUp() when the given index is out of range.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by SwapElements() when the inputs to SwapElements() are invalid.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by SwapElements() when there are less than 2 elements in the heap.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by HeapifyBottomUp() when the heap is empty.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Thrown by Add() when the heap is in read-only mode.
-        /// </exception>
         public
         void
         Enqueue( float priority, T value )
         {
-            try
-            {
-                __heap.Push( priority, value );
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
+            __heap.Push( priority, value );
         }
 
 
         /// <summary>
         /// Dequeues the element with the highest priority and returns it.
         /// </summary>
-        /// <returns>A KeyValuePair where the key is set to the priority of the dequeued element
+        /// <returns>A PriorityValuePair where the key is set to the priority of the dequeued element
         /// and the value is set to the value of the dequeued element.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by HeapifyTopDown() when the given index is out of range.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by SwapElements() when the inputs to SwapElements() are invalid.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by List.RemoveAt() when the inputs to List.RemoveAt() are invalid.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by SwapElements() when there are less than 2 elements in the heap.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when the heap is empty.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Thrown by List.Clear() when the heap is in read-only mode.
-        /// </exception>
         public
-        KeyValuePair<float, T>
+        PriorityValuePair<T>
         Dequeue()
         {
-            KeyValuePair<float, T> result;
-            try
-            {
-                result = __heap.Pop();
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
-            return result;
+            return __heap.Pop();
+        }
+
+
+        /// <summary>
+        /// Dequeues the element with the highest priority and returns its priority.
+        /// </summary>
+        /// <returns>The priority of the dequeued element.</returns>
+        public
+        float
+        DequeuePriority()
+        {
+            return __heap.PopPriority();
         }
 
 
@@ -317,38 +193,11 @@ namespace Axon.Collections
         /// Dequeues the element with the highest priority and returns its value.
         /// </summary>
         /// <returns>The value of the dequeued element.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by HeapifyTopDown() when the given index is out of range.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by SwapElements() when the inputs to SwapElements() are invalid.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by List.RemoveAt() when the inputs to List.RemoveAt() are invalid.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by SwapElements() when there are less than 2 elements in the heap.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when the heap is empty.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Thrown by List.Clear() when the heap is in read-only mode.
-        /// </exception>
         public
         T
         DequeueValue()
         {
-            T result;
-            try
-            {
-                result = __heap.Pop().Value;
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
-            return result;
+            return __heap.PopValue();
         }
 
 
@@ -358,7 +207,7 @@ namespace Axon.Collections
         /// </summary>
         /// <returns>An generic enumerator of the queue's contents.</returns>
         public
-        IEnumerator< KeyValuePair<float, T> >
+        IEnumerator< PriorityValuePair<T> >
         GetEnumerator()
         {
             return __heap.GetEnumerator();
@@ -380,25 +229,26 @@ namespace Axon.Collections
         /// <summary>
         /// Returns the element with the highest priority, but doesn't remove it from the queue.
         /// </summary>
-        /// <returns>A KeyValuePair where the key is set to the priority of the dequeued element
+        /// <returns>A PriorityValuePair where the key is set to the priority of the dequeued element
         /// and the value is set to the data/value of the dequeued element.</returns>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when the heap is empty.
-        /// </exception>
         public
-        KeyValuePair<float, T>
+        PriorityValuePair<T>
         Peek()
         {
-            KeyValuePair<float, T> result;
-            try
-            {
-                result = __heap.Peek();
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
-            return result;
+            return __heap.Peek();
+        }
+
+
+        /// <summary>
+        /// Returns the priority of the element with the highest priority, but doesn't remove the 
+		/// element from the queue.
+        /// </summary>
+        /// <returns>The priority of the PriorityValuePair at the front of the queue.</returns>
+        public
+        float
+        PeekPriority()
+        {
+            return __heap.PeekPriority();
         }
 
 
@@ -406,66 +256,26 @@ namespace Axon.Collections
         /// Returns the value of the element with the highest priority, but doesn't remove the 
 		/// element from the queue.
         /// </summary>
-        /// <returns>A KeyValuePair where the key is set to the priority of the dequeued element
-        /// and the value is set to the data/value of the dequeued element.</returns>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when the heap is empty.
-        /// </exception>
+        /// <returns>The value of the PriorityValuePair at the front of the queue.</returns>
         public
         T
         PeekValue()
         {
-            T result;
-            try
-            {
-                result = __heap.Peek().Value;
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
-            return result;
+            return __heap.PeekValue();
         }
 
 
         /// <summary>
-        /// Removes the first occurrence of the given KeyValuePair element within the queue.
+        /// Removes the first occurrence of the given PriorityValuePair element within the queue.
         /// </summary>
-        /// <param name="item">The KeyValuePair element to remove from the queue.</param>
+        /// <param name="item">The PriorityValuePair element to remove from the queue.</param>
         /// <returns><c>true</c> if item was successfully removed from the priority queue.
         /// This method returns false if item is not found in the collection.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by HeapifyTopDown() when the inputs to HeapifyTopDown() are out of range.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by SwapElements() when the inputs to SwapElements() are invalid.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown by List.RemoveAt() when the inputs to List.RemoveAt() are invalid.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown by SwapElements() when there are less than 2 elements in the heap.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown when the heap is empty.
-        /// </exception>
-        /// <remarks>
-        /// See Inspiration.cs Remove() for the original algorithm.
-        /// </remarks>
         public
         bool
-        Remove( KeyValuePair<float, T> element )
+        Remove( PriorityValuePair<T> element )
         {
-            bool result = false;
-            try
-            {
-                result = __heap.Remove( element );
-            }
-            catch ( Exception e )
-            {
-                throw e;
-            }
-            return result;
+            return __heap.Remove( element );
         }
 
 

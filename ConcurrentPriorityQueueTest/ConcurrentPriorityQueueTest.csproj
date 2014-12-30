@@ -56,6 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ConcurrentBinaryMinHeap\ConcurrentBinaryMinHeap\ConcurrentBinaryMinHeap.csproj">
+      <Project>{33d0afb1-536e-4316-b240-871c54a6096f}</Project>
+      <Name>ConcurrentBinaryMinHeap</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ConcurrentPriorityQueue\ConcurrentPriorityQueue.csproj">
       <Project>{4b0f9710-8a7d-40e5-a15d-22a7ba6a35e2}</Project>
       <Name>ConcurrentPriorityQueue</Name>

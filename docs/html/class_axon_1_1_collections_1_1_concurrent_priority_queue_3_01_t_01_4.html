@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">ConcurrentPriorityQueue
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">0.1.0</span>
    </div>
    <div id="projectbrief">A .NET 3.5 C# implementation of a thread-safe priority queue, suitable for use with MonoGame/Unity3D.</div>
   </td>
@@ -133,43 +133,49 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a80521ca55df97ddb47270c88f73f6ab9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a80521ca55df97ddb47270c88f73f6ab9">ConcurrentPriorityQueue</a> (int initialCapacity)</td></tr>
 <tr class="memdesc:a80521ca55df97ddb47270c88f73f6ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new priority queue with the given initial size of the heap implementing it internally.  <a href="#a80521ca55df97ddb47270c88f73f6ab9">More...</a><br /></td></tr>
 <tr class="separator:a80521ca55df97ddb47270c88f73f6ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6ee354d951b485453c3f2ad229a863e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ab6ee354d951b485453c3f2ad229a863e">Add</a> (KeyValuePair&lt; float, T &gt; element)</td></tr>
-<tr class="memdesc:ab6ee354d951b485453c3f2ad229a863e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a KeyValuePair as a new element into the queue.  <a href="#ab6ee354d951b485453c3f2ad229a863e">More...</a><br /></td></tr>
-<tr class="separator:ab6ee354d951b485453c3f2ad229a863e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8a76279fbb5056486ce8bfce3c9509c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ad8a76279fbb5056486ce8bfce3c9509c">Add</a> (PriorityValuePair&lt; T &gt; element)</td></tr>
+<tr class="memdesc:ad8a76279fbb5056486ce8bfce3c9509c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues a PriorityValuePair as a new element into the queue.  <a href="#ad8a76279fbb5056486ce8bfce3c9509c">More...</a><br /></td></tr>
+<tr class="separator:ad8a76279fbb5056486ce8bfce3c9509c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a800cb228bca4cfa298795449e758f207"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a800cb228bca4cfa298795449e758f207">Clear</a> ()</td></tr>
 <tr class="memdesc:a800cb228bca4cfa298795449e758f207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the queue of all elements.  <a href="#a800cb228bca4cfa298795449e758f207">More...</a><br /></td></tr>
 <tr class="separator:a800cb228bca4cfa298795449e758f207"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd457b1a662eb9baf48b6e6bb685d4f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#afd457b1a662eb9baf48b6e6bb685d4f1">Contains</a> (KeyValuePair&lt; float, T &gt; element)</td></tr>
-<tr class="memdesc:afd457b1a662eb9baf48b6e6bb685d4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether or not the queue contains the given KeyValuePair element.  <a href="#afd457b1a662eb9baf48b6e6bb685d4f1">More...</a><br /></td></tr>
-<tr class="separator:afd457b1a662eb9baf48b6e6bb685d4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcf4af0530416918674ce3243860ee87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#adcf4af0530416918674ce3243860ee87">CopyTo</a> (KeyValuePair&lt; float, T &gt;[] array, int arrayIndex)</td></tr>
-<tr class="memdesc:adcf4af0530416918674ce3243860ee87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements of the priority queue to an Array, starting at a particular index. This method does not guarantee that elements will be copied in the sorted order.  <a href="#adcf4af0530416918674ce3243860ee87">More...</a><br /></td></tr>
-<tr class="separator:adcf4af0530416918674ce3243860ee87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d073cb9fc7524dbc795f6ea78bedc4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a4d073cb9fc7524dbc795f6ea78bedc4a">Enqueue</a> (KeyValuePair&lt; float, T &gt; element)</td></tr>
-<tr class="memdesc:a4d073cb9fc7524dbc795f6ea78bedc4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues an existing KeyValuePair element into the priority queue.  <a href="#a4d073cb9fc7524dbc795f6ea78bedc4a">More...</a><br /></td></tr>
-<tr class="separator:a4d073cb9fc7524dbc795f6ea78bedc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a2f4313e3cab59b309907cdbad59eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a51a2f4313e3cab59b309907cdbad59eb">Contains</a> (PriorityValuePair&lt; T &gt; element)</td></tr>
+<tr class="memdesc:a51a2f4313e3cab59b309907cdbad59eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether or not the queue contains the given PriorityValuePair element.  <a href="#a51a2f4313e3cab59b309907cdbad59eb">More...</a><br /></td></tr>
+<tr class="separator:a51a2f4313e3cab59b309907cdbad59eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4eb756760bf68a01dc0150c8c18e7a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ad4eb756760bf68a01dc0150c8c18e7a4">CopyTo</a> (PriorityValuePair&lt; T &gt;[] array, int arrayIndex)</td></tr>
+<tr class="memdesc:ad4eb756760bf68a01dc0150c8c18e7a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements of the priority queue to an Array, starting at a particular index. This method does not guarantee that elements will be copied in the sorted order.  <a href="#ad4eb756760bf68a01dc0150c8c18e7a4">More...</a><br /></td></tr>
+<tr class="separator:ad4eb756760bf68a01dc0150c8c18e7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0168f2fd9c460986959f3ff0051e2e6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a0168f2fd9c460986959f3ff0051e2e6c">Enqueue</a> (PriorityValuePair&lt; T &gt; element)</td></tr>
+<tr class="memdesc:a0168f2fd9c460986959f3ff0051e2e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues an existing PriorityValuePair element into the priority queue.  <a href="#a0168f2fd9c460986959f3ff0051e2e6c">More...</a><br /></td></tr>
+<tr class="separator:a0168f2fd9c460986959f3ff0051e2e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2055611591836443726cb0b95868473"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#aa2055611591836443726cb0b95868473">Enqueue</a> (float priority, T value)</td></tr>
 <tr class="memdesc:aa2055611591836443726cb0b95868473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues an element into the priority queue.  <a href="#aa2055611591836443726cb0b95868473">More...</a><br /></td></tr>
 <tr class="separator:aa2055611591836443726cb0b95868473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa896f56778b08148ebc579d53f22b9fe"><td class="memItemLeft" align="right" valign="top">KeyValuePair&lt; float, T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#aa896f56778b08148ebc579d53f22b9fe">Dequeue</a> ()</td></tr>
-<tr class="memdesc:aa896f56778b08148ebc579d53f22b9fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dequeues the element with the highest priority and returns it.  <a href="#aa896f56778b08148ebc579d53f22b9fe">More...</a><br /></td></tr>
-<tr class="separator:aa896f56778b08148ebc579d53f22b9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb007019dac4153bbdd18d64c2995b0"><td class="memItemLeft" align="right" valign="top">PriorityValuePair&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a1cb007019dac4153bbdd18d64c2995b0">Dequeue</a> ()</td></tr>
+<tr class="memdesc:a1cb007019dac4153bbdd18d64c2995b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dequeues the element with the highest priority and returns it.  <a href="#a1cb007019dac4153bbdd18d64c2995b0">More...</a><br /></td></tr>
+<tr class="separator:a1cb007019dac4153bbdd18d64c2995b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c8c328278aefa2d2993c861d13f8108"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a6c8c328278aefa2d2993c861d13f8108">DequeuePriority</a> ()</td></tr>
+<tr class="memdesc:a6c8c328278aefa2d2993c861d13f8108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dequeues the element with the highest priority and returns its priority.  <a href="#a6c8c328278aefa2d2993c861d13f8108">More...</a><br /></td></tr>
+<tr class="separator:a6c8c328278aefa2d2993c861d13f8108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a5f4368804928e89e3c7bec877285fa"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a8a5f4368804928e89e3c7bec877285fa">DequeueValue</a> ()</td></tr>
 <tr class="memdesc:a8a5f4368804928e89e3c7bec877285fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dequeues the element with the highest priority and returns its value.  <a href="#a8a5f4368804928e89e3c7bec877285fa">More...</a><br /></td></tr>
 <tr class="separator:a8a5f4368804928e89e3c7bec877285fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0527663eaa508d8f048af549002fa32"><td class="memItemLeft" align="right" valign="top">IEnumerator&lt; KeyValuePair<br class="typebreak" />
-&lt; float, T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ae0527663eaa508d8f048af549002fa32">GetEnumerator</a> ()</td></tr>
-<tr class="memdesc:ae0527663eaa508d8f048af549002fa32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an enumerator that iterates through the queue's elements. This enumerator is not guaranteed to iterate through elements in sorted order.  <a href="#ae0527663eaa508d8f048af549002fa32">More...</a><br /></td></tr>
-<tr class="separator:ae0527663eaa508d8f048af549002fa32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a26e35d3833dee7b1bf43af97a69aa6"><td class="memItemLeft" align="right" valign="top">KeyValuePair&lt; float, T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a3a26e35d3833dee7b1bf43af97a69aa6">Peek</a> ()</td></tr>
-<tr class="memdesc:a3a26e35d3833dee7b1bf43af97a69aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the element with the highest priority, but doesn't remove it from the queue.  <a href="#a3a26e35d3833dee7b1bf43af97a69aa6">More...</a><br /></td></tr>
-<tr class="separator:a3a26e35d3833dee7b1bf43af97a69aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a5c89ef4ffb75ef6064fa3a205d8de9"><td class="memItemLeft" align="right" valign="top">IEnumerator&lt; PriorityValuePair<br class="typebreak" />
+&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a3a5c89ef4ffb75ef6064fa3a205d8de9">GetEnumerator</a> ()</td></tr>
+<tr class="memdesc:a3a5c89ef4ffb75ef6064fa3a205d8de9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an enumerator that iterates through the queue's elements. This enumerator is not guaranteed to iterate through elements in sorted order.  <a href="#a3a5c89ef4ffb75ef6064fa3a205d8de9">More...</a><br /></td></tr>
+<tr class="separator:a3a5c89ef4ffb75ef6064fa3a205d8de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2a4cef5a065682ac08f1ba3f257eec3"><td class="memItemLeft" align="right" valign="top">PriorityValuePair&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ac2a4cef5a065682ac08f1ba3f257eec3">Peek</a> ()</td></tr>
+<tr class="memdesc:ac2a4cef5a065682ac08f1ba3f257eec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the element with the highest priority, but doesn't remove it from the queue.  <a href="#ac2a4cef5a065682ac08f1ba3f257eec3">More...</a><br /></td></tr>
+<tr class="separator:ac2a4cef5a065682ac08f1ba3f257eec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a050385b20a37870c7b6403c41ae6b9b9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a050385b20a37870c7b6403c41ae6b9b9">PeekPriority</a> ()</td></tr>
+<tr class="memdesc:a050385b20a37870c7b6403c41ae6b9b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the priority of the element with the highest priority, but doesn't remove the element from the queue.  <a href="#a050385b20a37870c7b6403c41ae6b9b9">More...</a><br /></td></tr>
+<tr class="separator:a050385b20a37870c7b6403c41ae6b9b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab36b0be21dd55d066ff61cdc5a8fa5ad"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ab36b0be21dd55d066ff61cdc5a8fa5ad">PeekValue</a> ()</td></tr>
 <tr class="memdesc:ab36b0be21dd55d066ff61cdc5a8fa5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of the element with the highest priority, but doesn't remove the element from the queue.  <a href="#ab36b0be21dd55d066ff61cdc5a8fa5ad">More...</a><br /></td></tr>
 <tr class="separator:ab36b0be21dd55d066ff61cdc5a8fa5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10d915a61ade5a35d1415c525f6ad7b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a10d915a61ade5a35d1415c525f6ad7b6">Remove</a> (KeyValuePair&lt; float, T &gt; element)</td></tr>
-<tr class="memdesc:a10d915a61ade5a35d1415c525f6ad7b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first occurrence of the given KeyValuePair element within the queue.  <a href="#a10d915a61ade5a35d1415c525f6ad7b6">More...</a><br /></td></tr>
-<tr class="separator:a10d915a61ade5a35d1415c525f6ad7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d0d07e651666d094e2fcf56ae3ee4cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a6d0d07e651666d094e2fcf56ae3ee4cf">Remove</a> (PriorityValuePair&lt; T &gt; element)</td></tr>
+<tr class="memdesc:a6d0d07e651666d094e2fcf56ae3ee4cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first occurrence of the given PriorityValuePair element within the queue.  <a href="#a6d0d07e651666d094e2fcf56ae3ee4cf">More...</a><br /></td></tr>
+<tr class="separator:a6d0d07e651666d094e2fcf56ae3ee4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -243,34 +249,24 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ab6ee354d951b485453c3f2ad229a863e"></a>
+<a class="anchor" id="ad8a76279fbb5056486ce8bfce3c9509c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Add </td>
           <td>(</td>
-          <td class="paramtype">KeyValuePair&lt; float, T &gt;&#160;</td>
+          <td class="paramtype">PriorityValuePair&lt; T &gt;&#160;</td>
           <td class="paramname"><em>element</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enqueues a KeyValuePair as a new element into the queue. </p>
+<p>Enqueues a PriorityValuePair as a new element into the queue. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item</td><td>KeyValuePair to add as a new element.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by HeapifyBottomUp() when the given index is out of range. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by SwapElements() when the inputs to SwapElements() are invalid. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by SwapElements() when there are less than 2 elements in the heap. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by HeapifyBottomUp() when the heap is empty. </td></tr>
-    <tr><td class="paramname">NotSupportedException</td><td>Thrown by List.Add() when the heap is in read-only mode. </td></tr>
+    <tr><td class="paramname">item</td><td>PriorityValuePair to add as a new element.</td></tr>
   </table>
   </dd>
 </dl>
@@ -291,54 +287,42 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clears the queue of all elements. </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">NotSupportedException</td><td>Thrown when the heap is in read-only mode. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
-<a class="anchor" id="afd457b1a662eb9baf48b6e6bb685d4f1"></a>
+<a class="anchor" id="a51a2f4313e3cab59b309907cdbad59eb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Contains </td>
           <td>(</td>
-          <td class="paramtype">KeyValuePair&lt; float, T &gt;&#160;</td>
+          <td class="paramtype">PriorityValuePair&lt; T &gt;&#160;</td>
           <td class="paramname"><em>element</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns whether or not the queue contains the given KeyValuePair element. </p>
+<p>Returns whether or not the queue contains the given PriorityValuePair element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item</td><td>The KeyValuePair to locate in the queue.</td></tr>
+    <tr><td class="paramname">item</td><td>The PriorityValuePair to locate in the queue.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if item is found in the queue; otherwise, <code>false</code>.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">NotSupportedException</td><td>Thrown when the heap is in read-only mode. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
-<a class="anchor" id="adcf4af0530416918674ce3243860ee87"></a>
+<a class="anchor" id="ad4eb756760bf68a01dc0150c8c18e7a4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.CopyTo </td>
           <td>(</td>
-          <td class="paramtype">KeyValuePair&lt; float, T &gt;[]&#160;</td>
+          <td class="paramtype">PriorityValuePair&lt; T &gt;[]&#160;</td>
           <td class="paramname"><em>array</em>, </td>
         </tr>
         <tr>
@@ -363,24 +347,15 @@ Properties</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ArgumentNullException</td><td>Thrown when the given array is null. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown when the given index is less than 0. </td></tr>
-    <tr><td class="paramname">ArgumentException</td><td>Thrown if the given array is multi-dimensional. </td></tr>
-    <tr><td class="paramname">ArgumentException</td><td>Thrown if there is not enough space in the array from arrayIndex to the end to hold the heap data to be copied. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
-<a class="anchor" id="aa896f56778b08148ebc579d53f22b9fe"></a>
+<a class="anchor" id="a1cb007019dac4153bbdd18d64c2995b0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">KeyValuePair&lt;float, T&gt; Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Dequeue </td>
+          <td class="memname">PriorityValuePair&lt;T&gt; Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Dequeue </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -389,18 +364,25 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Dequeues the element with the highest priority and returns it. </p>
-<dl class="section return"><dt>Returns</dt><dd>A KeyValuePair where the key is set to the priority of the dequeued element and the value is set to the value of the dequeued element.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by HeapifyTopDown() when the given index is out of range. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by SwapElements() when the inputs to SwapElements() are invalid. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by List.RemoveAt() when the inputs to List.RemoveAt() are invalid. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by SwapElements() when there are less than 2 elements in the heap. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown when the heap is empty. </td></tr>
-    <tr><td class="paramname">NotSupportedException</td><td>Thrown by List.Clear() when the heap is in read-only mode. </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>A PriorityValuePair where the key is set to the priority of the dequeued element and the value is set to the value of the dequeued element.</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6c8c328278aefa2d2993c861d13f8108"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.DequeuePriority </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dequeues the element with the highest priority and returns its priority. </p>
+<dl class="section return"><dt>Returns</dt><dd>The priority of the dequeued element.</dd></dl>
 
 </div>
 </div>
@@ -419,48 +401,27 @@ Properties</h2></td></tr>
 
 <p>Dequeues the element with the highest priority and returns its value. </p>
 <dl class="section return"><dt>Returns</dt><dd>The value of the dequeued element.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by HeapifyTopDown() when the given index is out of range. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by SwapElements() when the inputs to SwapElements() are invalid. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by List.RemoveAt() when the inputs to List.RemoveAt() are invalid. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by SwapElements() when there are less than 2 elements in the heap. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown when the heap is empty. </td></tr>
-    <tr><td class="paramname">NotSupportedException</td><td>Thrown by List.Clear() when the heap is in read-only mode. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
-<a class="anchor" id="a4d073cb9fc7524dbc795f6ea78bedc4a"></a>
+<a class="anchor" id="a0168f2fd9c460986959f3ff0051e2e6c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Enqueue </td>
           <td>(</td>
-          <td class="paramtype">KeyValuePair&lt; float, T &gt;&#160;</td>
+          <td class="paramtype">PriorityValuePair&lt; T &gt;&#160;</td>
           <td class="paramname"><em>element</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enqueues an existing KeyValuePair element into the priority queue. </p>
+<p>Enqueues an existing PriorityValuePair element into the priority queue. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">element</td><td>A KeyValuePair element.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by HeapifyBottomUp() when the given index is out of range. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by SwapElements() when the inputs to SwapElements() are invalid. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by SwapElements() when there are less than 2 elements in the heap. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by HeapifyBottomUp() when the heap is empty. </td></tr>
-    <tr><td class="paramname">NotSupportedException</td><td>Thrown by <a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ab6ee354d951b485453c3f2ad229a863e" title="Enqueues a KeyValuePair as a new element into the queue. ">Add()</a> when the heap is in read-only mode. </td></tr>
+    <tr><td class="paramname">element</td><td>A PriorityValuePair element.</td></tr>
   </table>
   </dd>
 </dl>
@@ -499,25 +460,15 @@ Properties</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by HeapifyBottomUp() when the given index is out of range. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by SwapElements() when the inputs to SwapElements() are invalid. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by SwapElements() when there are less than 2 elements in the heap. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by HeapifyBottomUp() when the heap is empty. </td></tr>
-    <tr><td class="paramname">NotSupportedException</td><td>Thrown by <a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#ab6ee354d951b485453c3f2ad229a863e" title="Enqueues a KeyValuePair as a new element into the queue. ">Add()</a> when the heap is in read-only mode. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
-<a class="anchor" id="ae0527663eaa508d8f048af549002fa32"></a>
+<a class="anchor" id="a3a5c89ef4ffb75ef6064fa3a205d8de9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">IEnumerator&lt; KeyValuePair&lt;float, T&gt; &gt; Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.GetEnumerator </td>
+          <td class="memname">IEnumerator&lt; PriorityValuePair&lt;T&gt; &gt; Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.GetEnumerator </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -530,12 +481,12 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3a26e35d3833dee7b1bf43af97a69aa6"></a>
+<a class="anchor" id="ac2a4cef5a065682ac08f1ba3f257eec3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">KeyValuePair&lt;float, T&gt; Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Peek </td>
+          <td class="memname">PriorityValuePair&lt;T&gt; Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Peek </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -544,13 +495,25 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the element with the highest priority, but doesn't remove it from the queue. </p>
-<dl class="section return"><dt>Returns</dt><dd>A KeyValuePair where the key is set to the priority of the dequeued element and the value is set to the data/value of the dequeued element.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown when the heap is empty. </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>A PriorityValuePair where the key is set to the priority of the dequeued element and the value is set to the data/value of the dequeued element.</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a050385b20a37870c7b6403c41ae6b9b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.PeekPriority </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the priority of the element with the highest priority, but doesn't remove the element from the queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>The priority of the PriorityValuePair at the front of the queue.</dd></dl>
 
 </div>
 </div>
@@ -568,49 +531,32 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the value of the element with the highest priority, but doesn't remove the element from the queue. </p>
-<dl class="section return"><dt>Returns</dt><dd>A KeyValuePair where the key is set to the priority of the dequeued element and the value is set to the data/value of the dequeued element.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown when the heap is empty. </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the PriorityValuePair at the front of the queue.</dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a10d915a61ade5a35d1415c525f6ad7b6"></a>
+<a class="anchor" id="a6d0d07e651666d094e2fcf56ae3ee4cf"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Axon.Collections.ConcurrentPriorityQueue&lt; T &gt;.Remove </td>
           <td>(</td>
-          <td class="paramtype">KeyValuePair&lt; float, T &gt;&#160;</td>
+          <td class="paramtype">PriorityValuePair&lt; T &gt;&#160;</td>
           <td class="paramname"><em>element</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Removes the first occurrence of the given KeyValuePair element within the queue. </p>
+<p>Removes the first occurrence of the given PriorityValuePair element within the queue. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">item</td><td>The KeyValuePair element to remove from the queue.</td></tr>
+    <tr><td class="paramname">item</td><td>The PriorityValuePair element to remove from the queue.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if item was successfully removed from the priority queue. This method returns false if item is not found in the collection.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by HeapifyTopDown() when the inputs to HeapifyTopDown() are out of range. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by SwapElements() when the inputs to SwapElements() are invalid. </td></tr>
-    <tr><td class="paramname">ArgumentOutOfRangeException</td><td>Thrown by List.RemoveAt() when the inputs to List.RemoveAt() are invalid. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown by SwapElements() when there are less than 2 elements in the heap. </td></tr>
-    <tr><td class="paramname">InvalidOperationException</td><td>Thrown when the heap is empty. </td></tr>
-  </table>
-  </dd>
-</dl>
-<p>See Inspiration.cs <a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html#a10d915a61ade5a35d1415c525f6ad7b6" title="Removes the first occurrence of the given KeyValuePair element within the queue. ">Remove()</a> for the original algorithm. </p>
 
 </div>
 </div>
@@ -704,7 +650,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Development/_GitHub/ConcurrentPriorityQueue/ConcurrentPriorityQueue/<a class="el" href="_concurrent_priority_queue_8cs.html">ConcurrentPriorityQueue.cs</a></li>
+<li>ConcurrentPriorityQueue/<a class="el" href="_concurrent_priority_queue_8cs.html">ConcurrentPriorityQueue.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -712,7 +658,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_axon.html">Axon</a></li><li class="navelem"><a class="el" href="namespace_axon_1_1_collections.html">Collections</a></li><li class="navelem"><a class="el" href="class_axon_1_1_collections_1_1_concurrent_priority_queue_3_01_t_01_4.html">ConcurrentPriorityQueue< T ></a></li>
-    <li class="footer">Generated on Mon Dec 29 2014 15:09:50 for ConcurrentPriorityQueue by
+    <li class="footer">Generated on Tue Dec 30 2014 00:30:01 for ConcurrentPriorityQueue by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.7 </li>
   </ul>
