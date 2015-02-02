@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrentPriorityQueue", "ConcurrentPriorityQueue\ConcurrentPriorityQueue.csproj", "{4B0F9710-8A7D-40E5-A15D-22A7BA6A35E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrentPriorityQueueTest", "ConcurrentPriorityQueueTest\ConcurrentPriorityQueueTest.csproj", "{805DFF42-5CFA-4583-85C9-91F7E80C521B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrentBinaryMinHeap", "..\ConcurrentBinaryMinHeap\ConcurrentBinaryMinHeap\ConcurrentBinaryMinHeap.csproj", "{33D0AFB1-536E-4316-B240-871C54A6096F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrentPriorityQueueExample", "ConcurrentPriorityQueueExample\ConcurrentPriorityQueueExample.csproj", "{F659CBC1-4334-4CCF-BA8E-39D85D835A82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{33D0AFB1-536E-4316-B240-871C54A6096F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D0AFB1-536E-4316-B240-871C54A6096F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D0AFB1-536E-4316-B240-871C54A6096F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F659CBC1-4334-4CCF-BA8E-39D85D835A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F659CBC1-4334-4CCF-BA8E-39D85D835A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F659CBC1-4334-4CCF-BA8E-39D85D835A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F659CBC1-4334-4CCF-BA8E-39D85D835A82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

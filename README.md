@@ -7,7 +7,7 @@ A .NET 3.5 C# implementation of a thread-safe priority queue, suitable for use w
 
 A thread-safe generic priority queue implemented in C# using a binary heap for sorting elements by priority.
 
-*This queue does not guarantee FIFO ordering of elements with the same priority value.*
+This queue guarantees FIFO ordering of elements queued with the same priority value.
 
 Thread safety is achieved by using System.Monitor to lock critical sections within heap operations whenever appropriate, since more sophisticated options such as SpinLock/SpinWait are not available without .NET Framework 4.0 support.
 
