@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['enqueue',['Enqueue',['../class_axon_1_1_collections_1_1_concurrent_priority_queue.html#a0168f2fd9c460986959f3ff0051e2e6c',1,'Axon.Collections.ConcurrentPriorityQueue.Enqueue(PriorityValuePair&lt; T &gt; element)'],['../class_axon_1_1_collections_1_1_concurrent_priority_queue.html#a8b76a63361d822d2ccda1d2a077c1b51',1,'Axon.Collections.ConcurrentPriorityQueue.Enqueue(double priority, T value)']]],
-  ['epsilon',['EPSILON',['../class_axon_1_1_collections_1_1_concurrent_priority_queue.html#afdb9ec8bff8f024b3c3c5a01169f80db',1,'Axon::Collections::ConcurrentPriorityQueue']]]
+  ['enqueue',['Enqueue',['../classca_1_1axoninteractive_1_1_collections_1_1_concurrent_priority_queue.html#acf3717dd8b89d82e511036fce41a2510',1,'ca.axoninteractive.Collections.ConcurrentPriorityQueue.Enqueue(PriorityValuePair&lt; T &gt; element)'],['../classca_1_1axoninteractive_1_1_collections_1_1_concurrent_priority_queue.html#a888580e2500e94daf9b6a6c5b3c2df70',1,'ca.axoninteractive.Collections.ConcurrentPriorityQueue.Enqueue(double priority, T value)']]],
+  ['epsilon',['EPSILON',['../classca_1_1axoninteractive_1_1_collections_1_1_concurrent_priority_queue.html#a77ed0247ff31bdc408d6e6ea2652fa5b',1,'ca::axoninteractive::Collections::ConcurrentPriorityQueue']]]
 ];

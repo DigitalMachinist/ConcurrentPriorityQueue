@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['add',['Add',['../class_axon_1_1_collections_1_1_concurrent_priority_queue.html#ad8a76279fbb5056486ce8bfce3c9509c',1,'Axon::Collections::ConcurrentPriorityQueue']]],
-  ['assemblyinfo_2ecs',['AssemblyInfo.cs',['../_assembly_info_8cs.html',1,'']]],
-  ['axon',['Axon',['../namespace_axon.html',1,'']]],
-  ['collections',['Collections',['../namespace_axon_1_1_collections.html',1,'Axon']]]
+  ['add',['Add',['../classca_1_1axoninteractive_1_1_collections_1_1_concurrent_priority_queue.html#a213798e4b295bb797f3f81ca49d602a7',1,'ca::axoninteractive::Collections::ConcurrentPriorityQueue']]],
+  ['assemblyinfo_2ecs',['AssemblyInfo.cs',['../_assembly_info_8cs.html',1,'']]]
 ];

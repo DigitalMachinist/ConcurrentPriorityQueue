@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Axon.Collections
+namespace ca.axoninteractive.Collections
 {
     /// <summary>
     /// The ConcurrentPriorityQueue class is a thread-safe generic priority queue using a binary

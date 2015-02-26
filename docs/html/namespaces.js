@@ -1,4 +1,4 @@
 var namespaces =
 [
-    [ "Axon", "namespace_axon.html", "namespace_axon" ]
+    [ "ca", "namespaceca.html", "namespaceca" ]
 ];
